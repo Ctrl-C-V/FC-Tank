@@ -3,10 +3,10 @@
 
 TimeClock::TimeClock()
 {
-	QueryPerformanceFrequency(&litmp);	// 获取时钟频率
+	QueryPerformanceFrequency(&litmp);	// 鑾峰彇鏃堕挓棰戠巼
 	dfFreq = (double)litmp.QuadPart;
 
-	QueryPerformanceCounter(&litmp);		// 获取时钟计数(频率与时间的乘积)
+	QueryPerformanceCounter(&litmp);		// 鑾峰彇鏃堕挓璁℃暟(棰戠巼涓庢椂闂寸殑涔樼Н)
 	QPart1 = litmp.QuadPart;
 }
 
@@ -17,7 +17,7 @@ void TimeClock::SetDrtTime(double t)
 
 void TimeClock::Timer1()
 {
-	QueryPerformanceCounter(&litmp);		// 获取时钟计数(频率与时间的乘积)
+	QueryPerformanceCounter(&litmp);		// 鑾峰彇鏃堕挓璁℃暟(棰戠巼涓庢椂闂寸殑涔樼Н)
 	QPart1 = litmp.QuadPart;
 }
 

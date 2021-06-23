@@ -7,11 +7,11 @@
 #define S_SHOOT3	103
 #define S_BIN	2
 #define S_BK	3
-#define S_GETPROP	4		// »ñµÃµÀ¾ß
+#define S_GETPROP	4		// è·å¾—é“å…·
 #define S_PROPOUT	5
-#define S_ENEMY_BOMB	6		// µĞ»ú±¬Õ¨
+#define S_ENEMY_BOMB	6		// æ•Œæœºçˆ†ç‚¸
 #define S_CAMP_BOMB	7
-#define S_SCOREPANEL_DI	8		// ·ÖÊıÃæ°å àÖàÖÉù
+#define S_SCOREPANEL_DI	8		// åˆ†æ•°é¢æ¿ å˜€å˜€å£°
 #define S_BOUNS1000		9
 #define S_ADDLIFE	10
 #define S_WIN	11
@@ -31,6 +31,6 @@ public:
 
 	static void _PlaySound(int kind);
 
-	static void PauseBk(bool);		// ¿ªÊ¼»òÔİÍ£±³¾°ÒôÀÖ
-	static void PlayMovingSound(bool);		// Íæ¼ÒÌ¹¿ËÒÆ¶¯ÉùÒô
+	static void PauseBk(bool);		// å¼€å§‹æˆ–æš‚åœèƒŒæ™¯éŸ³ä¹
+	static void PlayMovingSound(bool);		// ç©å®¶å¦å…‹ç§»åŠ¨å£°éŸ³
 };

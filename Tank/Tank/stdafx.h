@@ -1,5 +1,5 @@
 
-// TODO: �ڴ˴����ó�����Ҫ������ͷ�ļ�
+// TODO: 在此处引用程序需要的其他头文件
 #include "graphics.h"
 #include <list>
 #include <time.h>

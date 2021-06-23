@@ -1,11 +1,11 @@
 #pragma once
 
-// Ö¸Ê¾Íæ¼ÒÑ¡Ôñ
+// æŒ‡ç¤ºç©å®¶é€‰æ‹©
 enum EnumSelectResult
 {
-	OnePlayer = 1,	// 1->1¸öÍæ¼Ò
-	TwoPlayer,		// 2->2¸öÍæ¼Ò
-	Custom,			// 3->×Ô¶¨ÒåµØÍ¼
+	OnePlayer = 1,	// 1->1ä¸ªç©å®¶
+	TwoPlayer,		// 2->2ä¸ªç©å®¶
+	Custom,			// 3->è‡ªå®šä¹‰åœ°å›¾
 	Error			// 4
 };
 
@@ -16,7 +16,7 @@ public:
 	~SelectPanel();
 
 	void Init();
-	EnumSelectResult ShowSelectPanel();			// ÏÔÊ¾Íæ¼ÒÑ¡ÔñÃæ°å, ·µ»ØÍæ¼ÒÑ¡Ôñ0,1,2, -1³ö´í
+	EnumSelectResult ShowSelectPanel();			// æ˜¾ç¤ºç©å®¶é€‰æ‹©é¢æ¿, è¿”å›ç©å®¶é€‰æ‹©0,1,2, -1å‡ºé”™
 private:
 	//void ShowStage();
 
@@ -24,17 +24,17 @@ private:
 	//Graphics* mGraphics;
 	HDC mDes_hdc, mImage_hdc;
 
-	// ÉÏÉı¶¯»­,Ñ¡Ôñµ¥ÈË\Ë«ÈË\×Ô¶¨Òå\ÓÎÏ·.
+	// ä¸Šå‡åŠ¨ç”»,é€‰æ‹©å•äºº\åŒäºº\è‡ªå®šä¹‰\æ¸¸æˆ.
 	IMAGE mSelect_player_image;
-	int mSelect_player_image_y;		// Í¼Æ¬´Óµ×²¿ÉÏÉı¿ØÖÆ,³õÊ¼Öµ=672, ´°¿Úµ×²¿
+	int mSelect_player_image_y;		// å›¾ç‰‡ä»åº•éƒ¨ä¸Šå‡æ§åˆ¶,åˆå§‹å€¼=672, çª—å£åº•éƒ¨
 
-	// ¿ªÊ¼Ñ¡Íæ¼Ò1£¬2£¬µØÍ¼
-	byte mCounter : 1;				// ÓÃÀ´ÇĞ»» mSelectTankImage ÏÂ±ê
+	// å¼€å§‹é€‰ç©å®¶1ï¼Œ2ï¼Œåœ°å›¾
+	byte mCounter : 1;				// ç”¨æ¥åˆ‡æ¢ mSelectTankImage ä¸‹æ ‡
 	IMAGE mSelectTankImage[2];
-	POINT mSelectTankPoint[3];		// Èı¸öÑ¡Ïî×ø±ê
-	int mSelectIndex;				// Ñ¡Ôñ½á¹û: 0,1,2
+	POINT mSelectTankPoint[3];		// ä¸‰ä¸ªé€‰é¡¹åæ ‡
+	int mSelectIndex;				// é€‰æ‹©ç»“æœ: 0,1,2
 
-	// Ñ¡ÔñÍæ¼ÒºóÏÔÊ¾¹Ø¿¨ĞÅÏ¢
-	IMAGE mGrayBackgroundImage;	// ÓÎÏ·»ÒÉ«±³¾°Í¼
-	IMAGE mBlackNumberImage;		// Êı×Ö 1234567890 Í¼Æ¬
+	// é€‰æ‹©ç©å®¶åæ˜¾ç¤ºå…³å¡ä¿¡æ¯
+	IMAGE mGrayBackgroundImage;	// æ¸¸æˆç°è‰²èƒŒæ™¯å›¾
+	IMAGE mBlackNumberImage;		// æ•°å­— 1234567890 å›¾ç‰‡
 };

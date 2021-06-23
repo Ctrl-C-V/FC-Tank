@@ -8,7 +8,7 @@
 void MciSound::InitSounds()
 { 
 	mciSendString(_T("open ./res/music/start.wav alias			start"), NULL, 0, NULL);
-	mciSendString(_T("open ./res/music/shoot.wav alias			shoot0"), NULL, 0, NULL);		// Ò»¸öÍæ¼ÒÁ½¸ö×Óµ¯
+	mciSendString(_T("open ./res/music/shoot.wav alias			shoot0"), NULL, 0, NULL);		// ä¸€ä¸ªç©å®¶ä¸¤ä¸ªå­å¼¹
 	mciSendString(_T("open ./res/music/shoot.wav alias			shoot1"), NULL, 0, NULL);
 	mciSendString(_T("open ./res/music/shoot.wav alias			shoot2"), NULL, 0, NULL);
 	mciSendString(_T("open ./res/music/shoot.wav alias			shoot3"), NULL, 0, NULL);

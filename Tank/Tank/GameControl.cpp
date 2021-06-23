@@ -11,23 +11,23 @@ GameControl::GameControl( HDC des_hdc, HDC image_hdc/*, BoxMarkStruct* bms*/)
 	mCenter_hdc = GetImageHDC(&mCenterImage);
 	mBoxMarkStruct = new BoxMarkStruct();
 
-	loadimage( &mBlackBackgroundImage, _T("./res/big/bg_black.gif"		));		// ºÚÉ«±³¾°
-	loadimage( &mGrayBackgroundImage , _T("./res/big/bg_gray.gif"		));		// »ÒÉ«±³¾°
-	loadimage( &mStoneImage			 , _T("./res/big/stone.gif"			));		// 12*12µÄÊ¯Í·
-	loadimage( &mForestImage		 , _T("./res/big/forest.gif"		));		// Ê÷ÁÖ
-	loadimage( &mIceImage			 , _T("./res/big/ice.gif"			));		// ±ù¿é
-	loadimage( &mRiverImage[0]		 , _T("./res/big/river-0.gif"		));		// ºÓÁ÷
+	loadimage( &mBlackBackgroundImage, _T("./res/big/bg_black.gif"		));		// é»‘è‰²èƒŒæ™¯
+	loadimage( &mGrayBackgroundImage , _T("./res/big/bg_gray.gif"		));		// ç°è‰²èƒŒæ™¯
+	loadimage( &mStoneImage			 , _T("./res/big/stone.gif"			));		// 12*12çš„çŸ³å¤´
+	loadimage( &mForestImage		 , _T("./res/big/forest.gif"		));		// æ ‘æ—
+	loadimage( &mIceImage			 , _T("./res/big/ice.gif"			));		// å†°å—
+	loadimage( &mRiverImage[0]		 , _T("./res/big/river-0.gif"		));		// æ²³æµ
 	loadimage( &mRiverImage[1]		 , _T("./res/big/river-1.gif"		));		//
-	loadimage( &mWallImage			 , _T("./res/big/wall.gif"			));		// ÄàÇ½
-	loadimage( &mCamp[0]			 , _T("./res/big/camp0.gif"			));		// ´ó±¾Óª
+	loadimage( &mWallImage			 , _T("./res/big/wall.gif"			));		// æ³¥å¢™
+	loadimage( &mCamp[0]			 , _T("./res/big/camp0.gif"			));		// å¤§æœ¬è¥
 	loadimage( &mCamp[1]			 , _T("./res/big/camp1.gif"			));		// 
-	loadimage( &mEnemyTankIcoImage	 , _T("./res/big/enemytank-ico.gif"	));		// µĞ»úÍ¼±ê
-	loadimage( &mFlagImage			 , _T("./res/big/flag.gif"			));		// Æì×Ó
+	loadimage( &mEnemyTankIcoImage	 , _T("./res/big/enemytank-ico.gif"	));		// æ•Œæœºå›¾æ ‡
+	loadimage( &mFlagImage			 , _T("./res/big/flag.gif"			));		// æ——å­
 	loadimage( &mCurrentStageImage	 , _T("./res/big/stage.gif"			));
-	loadimage( &mBlackNumberImage	 , _T("./res/big/black-number.gif"	));		// 0123456789 ºÚÉ«Êı×Ö
+	loadimage( &mBlackNumberImage	 , _T("./res/big/black-number.gif"	));		// 0123456789 é»‘è‰²æ•°å­—
 	loadimage( &mGameOverImage		 , _T("./res/big/gameover.gif"		));
 
-	// ×Ô¶¨Òå»æÖÆµØÍ¼
+	// è‡ªå®šä¹‰ç»˜åˆ¶åœ°å›¾
 	loadimage(&mCreateMapTankImage, _T("./res/big/0Player/m0-1-2.gif"));
 
 	loadimage(&msgoas_image, _T("./res/big/big-gameover.gif"));
@@ -44,7 +44,7 @@ GameControl::~GameControl()
 		//PlayerList.remove(*itor);
 	}
 
-	/* ·Åµ½·ÖÊıÃæ°åÏÔÊ¾ÍêºóÊÍ·Å
+	/* æ”¾åˆ°åˆ†æ•°é¢æ¿æ˜¾ç¤ºå®Œåé‡Šæ”¾
 	for (list<EnemyBase*>::iterator itor = EnemyList.begin(); itor != EnemyList.end(); itor++)
 	{
 		delete *itor;
@@ -60,39 +60,39 @@ GameControl::~GameControl()
 
 void GameControl::Init()
 {
-	//mOutedEnemyTankNumber = 0;													// ÒÑ¾­³öÏÖÔÚµØÍ¼ÉÏµÄµĞ»úÊıÁ¿,×î¶àÏÔÊ¾6¼Ü
-	mRemainEnemyTankNumber = 20;	 // Ê£ÓàÎ´³öÏÖµÄµĞ»úÊıÁ¿
+	//mOutedEnemyTankNumber = 0;													// å·²ç»å‡ºç°åœ¨åœ°å›¾ä¸Šçš„æ•Œæœºæ•°é‡,æœ€å¤šæ˜¾ç¤º6æ¶
+	mRemainEnemyTankNumber = 20;	 // å‰©ä½™æœªå‡ºç°çš„æ•Œæœºæ•°é‡
 	mCurMovingTankNumber = 0;
 	mKillEnemyNum = 0;
-	mCampDie = false;															// ±êÖ¾´ó±¾ÓªÊÇ·ñ±»»÷ÖĞ
+	mCampDie = false;															// æ ‡å¿—å¤§æœ¬è¥æ˜¯å¦è¢«å‡»ä¸­
 
-	mEnemyPause = false;			// µĞ»úÔİÍ£Óë·ñ
+	mEnemyPause = false;			// æ•Œæœºæš‚åœä¸å¦
 	//mEnemyPauseCounter = 0;		
-	mEnemyPauseTimer.SetDrtTime(10000);	// µĞ»úÔİÍ£¶à¾Ã
+	mEnemyPauseTimer.SetDrtTime(10000);	// æ•Œæœºæš‚åœå¤šä¹…
 
 	mMainTimer.SetDrtTime(14);
 	mCampTimer.SetDrtTime(33);
 
-	mCutStageCounter = 0;		// STAGE ×ÖÑù¼ÆÊı
+	mCutStageCounter = 0;		// STAGE å­—æ ·è®¡æ•°
 
-	// GameOver Í¼Æ¬
+	// GameOver å›¾ç‰‡
 	mGameOverCounter = 0;
 	mGameOverX = -100;
 	mGameOverY = -100;
 	mGameOverFlag = false;
 	mGameOverTimer.SetDrtTime(30);
 
-	// »æÖÆµØÍ¼Ì¹¿ËÓÎ±êµÄ×ø±ê
+	// ç»˜åˆ¶åœ°å›¾å¦å…‹æ¸¸æ ‡çš„åæ ‡
 	mCMTImageX = BOX_SIZE;
 	mCMTImageY = BOX_SIZE;
 
-	// Ã¿´Î½øÈëµØÍ¼ÖÆ×÷Ö®Ç°¶¼¼ì²âÖ®Ç°ÊÇ·ñÓĞÖÆ×÷µØÍ¼
+	// æ¯æ¬¡è¿›å…¥åœ°å›¾åˆ¶ä½œä¹‹å‰éƒ½æ£€æµ‹ä¹‹å‰æ˜¯å¦æœ‰åˆ¶ä½œåœ°å›¾
 	mHasCustomMap = false;
 
-	// ¹Ø¿¨½áÊøÏÔÊ¾·ÖÊıÃæ°å
+	// å…³å¡ç»“æŸæ˜¾ç¤ºåˆ†æ•°é¢æ¿
 	mShowScorePanel = false;
 
-	// Ê¤Àû
+	// èƒœåˆ©
 	mWin = false;
 	mWinCounter = 0;
 
@@ -102,7 +102,7 @@ void GameControl::Init()
 	mShowGameOverAfterScorePanel = false;
 }
 
-// ´æ´¢Íæ¼Ò½øÁ´±í
+// å­˜å‚¨ç©å®¶è¿›é“¾è¡¨
 void GameControl::AddPlayer(int player_num)
 {
 	for (list<PlayerBase*>::iterator itor = PlayerList.begin(); itor != PlayerList.end(); itor++)
@@ -110,7 +110,7 @@ void GameControl::AddPlayer(int player_num)
 		delete *itor;
 	}
 
-	// Çå¿ÕÔ­À´Êı¾İ
+	// æ¸…ç©ºåŸæ¥æ•°æ®
 	PlayerList.clear();
 
 	for (int i = 0; i < player_num; i++)
@@ -120,15 +120,15 @@ void GameControl::AddPlayer(int player_num)
 }
 
 /*
-* ¶ÁÈ¡dataÊı¾İ»æÖÆµØÍ¼,
-* ÏÔÊ¾µĞ»úÊıÁ¿\Íæ¼ÒÉúÃü\¹Ø¿¨\µÈĞÅÏ¢
+* è¯»å–dataæ•°æ®ç»˜åˆ¶åœ°å›¾,
+* æ˜¾ç¤ºæ•Œæœºæ•°é‡\ç©å®¶ç”Ÿå‘½\å…³å¡\ç­‰ä¿¡æ¯
 */
 void GameControl::LoadMap()
 {
-	// ¶ÁÈ¡µØÍ¼ÎÄ¼şÊı¾İ
+	// è¯»å–åœ°å›¾æ–‡ä»¶æ•°æ®
 	FILE* fp = NULL;
 	if (0 != fopen_s(&fp, "./res/data/map.dat", "rb"))
-		throw _T("¶ÁÈ¡µØÍ¼Êı¾İÎÄ¼şÒì³£.");
+		throw _T("è¯»å–åœ°å›¾æ•°æ®æ–‡ä»¶å¼‚å¸¸.");
 	fseek(fp, sizeof(Map) * (mCurrentStage - 1), SEEK_SET);
 	fread(&mMap, sizeof(Map), 1, fp);
 	fclose(fp);
@@ -136,20 +136,20 @@ void GameControl::LoadMap()
 	InitSignBox();
 }
 
-// Íæ¼Ò×Ô¼º´´½¨µØÍ¼
+// ç©å®¶è‡ªå·±åˆ›å»ºåœ°å›¾
 bool GameControl::CreateMap(bool* isCreate)
 {
 	int i, j, x = 0, y = 0;
 	int tempx, tempy;
 	bool flag = true;
-	int keys[4] = {VK_LEFT, VK_UP, VK_RIGHT, VK_DOWN};		// ÏÂ±ê±ØĞëÓë DIR_LEFT µÈ¶ÔÓ¦
-	int dev[4][2] = { {-1, 0}, {0, -1}, {1, 0}, {0, 1} };	// ÓÎ±êÌ¹¿ËÒÆ¶¯·ÖÁ¿
-	int twinkle_counter = 0;	// Ì¹¿ËÓÎ±êÉÁË¸¼ÆÊı
-	int lastx = mCMTImageX, lasty = mCMTImageY;			// ¼ÇÂ¼Ì¹¿ËÉÏ´ÎµÄ×ø±ê, Èç¹ûÌ¹¿ËÒÆ¶¯²»»á±ä»» sign_order Í¼ĞÎ
-	bool M_down = false;		// ¼ì²â M ÊÇ·ñ°´ÏÂ, Ò»Ö±°´ÏÂ M ²»»áÇĞ»»µØÍ¼, Ö»°´ÏÂµÄÄÇÒ»´ÎÇĞ»»
+	int keys[4] = {VK_LEFT, VK_UP, VK_RIGHT, VK_DOWN};		// ä¸‹æ ‡å¿…é¡»ä¸ DIR_LEFT ç­‰å¯¹åº”
+	int dev[4][2] = { {-1, 0}, {0, -1}, {1, 0}, {0, 1} };	// æ¸¸æ ‡å¦å…‹ç§»åŠ¨åˆ†é‡
+	int twinkle_counter = 0;	// å¦å…‹æ¸¸æ ‡é—ªçƒè®¡æ•°
+	int lastx = mCMTImageX, lasty = mCMTImageY;			// è®°å½•å¦å…‹ä¸Šæ¬¡çš„åæ ‡, å¦‚æœå¦å…‹ç§»åŠ¨ä¸ä¼šå˜æ¢ sign_order å›¾å½¢
+	bool M_down = false;		// æ£€æµ‹ M æ˜¯å¦æŒ‰ä¸‹, ä¸€ç›´æŒ‰ä¸‹ M ä¸ä¼šåˆ‡æ¢åœ°å›¾, åªæŒ‰ä¸‹çš„é‚£ä¸€æ¬¡åˆ‡æ¢
 
-	// 14 ÖĞÇé¿ö
-	int sign_order[14][4] = { {_ICE, _ICE, _ICE, _ICE},		// ËÄ¸ö¸ñ×Ó¶¼ÊÇ±ù, ÒÀ´Î×óÉÏÓÒÉÏ×óÏÂ ..
+	// 14 ä¸­æƒ…å†µ
+	int sign_order[14][4] = { {_ICE, _ICE, _ICE, _ICE},		// å››ä¸ªæ ¼å­éƒ½æ˜¯å†°, ä¾æ¬¡å·¦ä¸Šå³ä¸Šå·¦ä¸‹ ..
 		{ _FOREST,	_FOREST,	_FOREST,	_FOREST},
 		{ _RIVER,	_RIVER,		_RIVER,		_RIVER },
 		{ _STONE,	_STONE ,	_STONE ,	_STONE },
@@ -164,17 +164,17 @@ bool GameControl::CreateMap(bool* isCreate)
 		{ _EMPTY,	_WALL ,		_EMPTY,		_WALL },
 		{ _EMPTY,	_EMPTY ,	_EMPTY ,	_EMPTY } };
 	
-	int cur_index = 13;		// ¶ÔÓ¦ÉÏÃæÊı×é
+	int cur_index = 13;		// å¯¹åº”ä¸Šé¢æ•°ç»„
 
-	// Çå³ı»ò±£ÁôÉÏ´Î»æÖÆµÄµØÍ¼
+	// æ¸…é™¤æˆ–ä¿ç•™ä¸Šæ¬¡ç»˜åˆ¶çš„åœ°å›¾
 	if ( !mHasCustomMap )
 		ClearSignBox();
 
-	// °´¼üËÙ¶È
+	// æŒ‰é”®é€Ÿåº¦
 	TimeClock click;
 	click.SetDrtTime(80);
 
-	// »ÒÉ«±³¾°
+	// ç°è‰²èƒŒæ™¯
 	StretchBlt(mImage_hdc, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, GetImageHDC(&mGrayBackgroundImage), 0, 0, 66, 66, SRCCOPY);
 	int counter = 0;
 	while ( flag )
@@ -250,7 +250,7 @@ bool GameControl::CreateMap(bool* isCreate)
 				lasty = mCMTImageY;
 			}
 
-			// ¸ü¸Ä 16*16 µÄµØÍ¼
+			// æ›´æ”¹ 16*16 çš„åœ°å›¾
 			i = mCMTImageY / BOX_SIZE - 1;
 			j = mCMTImageX / BOX_SIZE - 1;
 			mBoxMarkStruct->box_8[i][j] = sign_order[cur_index][0];
@@ -270,7 +270,7 @@ bool GameControl::CreateMap(bool* isCreate)
 				lasty = mCMTImageY;
 			}
 
-			// ¸ü¸Ä 16*16 µÄµØÍ¼
+			// æ›´æ”¹ 16*16 çš„åœ°å›¾
 			i = mCMTImageY / BOX_SIZE - 1;
 			j = mCMTImageX / BOX_SIZE - 1;
 			mBoxMarkStruct->box_8[i][j] = sign_order[cur_index][0];
@@ -279,11 +279,11 @@ bool GameControl::CreateMap(bool* isCreate)
 			mBoxMarkStruct->box_8[i + 1][j + 1] = sign_order[cur_index][3];
 		}
 
-			// J,K ¼üÒ»¸öË³Ğò,Ò»¸öÄæĞò
+			// J,K é”®ä¸€ä¸ªé¡ºåº,ä¸€ä¸ªé€†åº
 			/*SHORT J_KEY = ;
 			SHORT K_KEY = ;
 
-			// ·ÅÖÃÕÏ°­Îï
+			// æ”¾ç½®éšœç¢ç‰©
 			if(J_KEY || K_KEY)
 			{
 				if (mCMTImageX == lastx && mCMTImageY == lasty)
@@ -299,7 +299,7 @@ bool GameControl::CreateMap(bool* isCreate)
 					lasty = mCMTImageY;
 				}
 
-				// ¸ü¸Ä 16*16 µÄµØÍ¼
+				// æ›´æ”¹ 16*16 çš„åœ°å›¾
 				i = mCMTImageY / BOX_SIZE - 1;
 				j = mCMTImageX / BOX_SIZE - 1;
 				mBoxMarkStruct->box_8[i][j] = sign_order[cur_index][0];
@@ -312,23 +312,23 @@ bool GameControl::CreateMap(bool* isCreate)
 		{
 			counter = 0;
 
-			// ±ê¼Ç 8*8 ¸ñ×ÓÄÚ²¿µÄ 4*4 ¸ñ×Ó
+			// æ ‡è®° 8*8 æ ¼å­å†…éƒ¨çš„ 4*4 æ ¼å­
 			for (i = 0; i < 26; i++)
 			{
 				for (j = 0; j < 26; j++)
 				{
-					// ¸ù¾İ 8*8 ±ê¼Ç 4*4 ¸ñ×Ó, ´ó±¾ÓªÖµ±ê¼Ç box_8
+					// æ ¹æ® 8*8 æ ‡è®° 4*4 æ ¼å­, å¤§æœ¬è¥å€¼æ ‡è®° box_8
 					if (mBoxMarkStruct->box_8[i][j] != _EMPTY && mBoxMarkStruct->box_8[i][j] != CAMP_SIGN)
 						SignBox_4(i, j, mBoxMarkStruct->box_8[i][j]);
 
-					// Çå¿ÕµĞ»ú³öÏÖµÄÈı¸öÎ»ÖÃ
+					// æ¸…ç©ºæ•Œæœºå‡ºç°çš„ä¸‰ä¸ªä½ç½®
 					if (i <= 1 && j <= 1 || j >= 12 && j <= 13 && i <= 1 || j >= 24 && i <= 1)
 					{
 						mBoxMarkStruct->box_8[i][j] = _EMPTY;
 						SignBox_4(i, j, _EMPTY);
 					}
 
-					// Äñ³²Î»ÖÃ²»ÄÜ»æÖÆ
+					// é¸Ÿå·¢ä½ç½®ä¸èƒ½ç»˜åˆ¶
 					if (i >= 24 && j >= 12 && j <= 13)
 					{
 						mBoxMarkStruct->box_8[i][j] = CAMP_SIGN;
@@ -343,7 +343,7 @@ bool GameControl::CreateMap(bool* isCreate)
 		if (GetAsyncKeyState(27) & 0x8000)
 			break;
 
-			/*M¼ü¹¦ÄÜ: ²»»áÁ¬Ğø¸ü»»µØÍ¼if (GetAsyncKeyState('M') & 0x8000 && M_down == false)
+			/*Mé”®åŠŸèƒ½: ä¸ä¼šè¿ç»­æ›´æ¢åœ°å›¾if (GetAsyncKeyState('M') & 0x8000 && M_down == false)
 			{
 				M_down = true;
 				if (mCMTImageX == lastx && mCMTImageY == lasty)
@@ -356,7 +356,7 @@ bool GameControl::CreateMap(bool* isCreate)
 					lasty = mCMTImageY;
 				}
 
-				// ¸ü¸Ä 16*16 µÄµØÍ¼
+				// æ›´æ”¹ 16*16 çš„åœ°å›¾
 				i = mCMTImageY / BOX_SIZE - 1;
 				j = mCMTImageX / BOX_SIZE - 1;
 				mBoxMarkStruct->box_8[i][j] = sign_order[cur_index][0];
@@ -366,7 +366,7 @@ bool GameControl::CreateMap(bool* isCreate)
 			}else if ( !GetAsyncKeyState('M') & 0x8000 )
 				M_down = false;*/
 
-		// ºÚÉ«±³¾°
+		// é»‘è‰²èƒŒæ™¯
 		StretchBlt(mCenter_hdc, 0, 0, CENTER_WIDTH, CENTER_HEIGHT, GetImageHDC(&mBlackBackgroundImage), 0, 0, CENTER_WIDTH, CENTER_HEIGHT, SRCCOPY);
 		
 		for (int i = 0; i < 26; i++)
@@ -398,18 +398,18 @@ bool GameControl::CreateMap(bool* isCreate)
 			}
 		}
 
-		// ´ó±¾Óª
+		// å¤§æœ¬è¥
 		TransparentBlt(mCenter_hdc, BOX_SIZE * 12, BOX_SIZE * 24, BOX_SIZE * 2, BOX_SIZE * 2,
 			GetImageHDC(&mCamp[0]), 0, 0, BOX_SIZE * 2, BOX_SIZE * 2, 0x000000);
 
-		// Ì¹¿ËÓÎ±ê
+		// å¦å…‹æ¸¸æ ‡
 		if(twinkle_counter++ / 28 % 2 == 0)
 			TransparentBlt(mCenter_hdc, mCMTImageX - BOX_SIZE, mCMTImageY - BOX_SIZE, BOX_SIZE * 2, BOX_SIZE * 2,
 				GetImageHDC(&mCreateMapTankImage), 0, 0, BOX_SIZE * 2, BOX_SIZE * 2, 0x000000);
 
-		// ½«ÖĞĞÄ»­²¼Ó¡µ½Ö÷»­²¼ mImage_hdc ÉÏ
+		// å°†ä¸­å¿ƒç”»å¸ƒå°åˆ°ä¸»ç”»å¸ƒ mImage_hdc ä¸Š
 		BitBlt(mImage_hdc, CENTER_X, CENTER_Y, CENTER_WIDTH, CENTER_HEIGHT, mCenter_hdc, 0, 0, SRCCOPY);
-		// ÕûÕÅ»­²¼Ëõ·ÅÏÔÊ¾ image µ½Ö÷´°¿Ú
+		// æ•´å¼ ç”»å¸ƒç¼©æ”¾æ˜¾ç¤º image åˆ°ä¸»çª—å£
 		StretchBlt(mDes_hdc, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, mImage_hdc, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, SRCCOPY);
 		FlushBatchDraw();
 	}
@@ -433,27 +433,27 @@ void GameControl::GameLoop()
 }
 
 /**********************************************
-* ÓĞĞòÑ­»·Ìå
-* »­ÃæË¢ĞÂ£ºÍæ¼Ò¡¢×Óµ¯¡¢µĞ»ú ËùÓĞµÄ¸üĞÂ¶¼ÔÚ´Ë
-* °´¼ü¼ì²â
+* æœ‰åºå¾ªç¯ä½“
+* ç”»é¢åˆ·æ–°ï¼šç©å®¶ã€å­å¼¹ã€æ•Œæœº æ‰€æœ‰çš„æ›´æ–°éƒ½åœ¨æ­¤
+* æŒ‰é”®æ£€æµ‹
 **********************************************/
 GameResult GameControl::StartGame()
 {
-	// Ö÷»æÍ¼²Ù×÷Ê±¼ä
+	// ä¸»ç»˜å›¾æ“ä½œæ—¶é—´
 	if (mMainTimer.IsTimeOut())
 	{
-		// Ê¤Àû»òÕßÊ§°Ü ÏÔÊ¾·ÖÊıÃæ°å
+		// èƒœåˆ©æˆ–è€…å¤±è´¥ æ˜¾ç¤ºåˆ†æ•°é¢æ¿
 		if (mShowScorePanel)
 		{
 			BitBlt(mImage_hdc, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, GetImageHDC(&ScorePanel::background), 0, 0, SRCCOPY);
 			for (list<PlayerBase*>::iterator itor = PlayerList.begin(); itor != PlayerList.end(); itor++)
 			{
-				// Èç¹û·ÖÊıÃæ°åÏÔÊ¾Íê
+				// å¦‚æœåˆ†æ•°é¢æ¿æ˜¾ç¤ºå®Œ
 				if (!(*itor)->ShowScorePanel(mImage_hdc))
 				{
 					mShowScorePanel = false;
 
-					// Ê¤Àû»òÊ§°Ü¶¼ÊÍ·ÅµĞ»ú×ÊÔ´
+					// èƒœåˆ©æˆ–å¤±è´¥éƒ½é‡Šæ”¾æ•Œæœºèµ„æº
 					for (list<EnemyBase*>::iterator EnemyItor = EnemyList.begin(); EnemyItor != EnemyList.end(); EnemyItor++)
 						delete *EnemyItor;
 					EnemyList.clear();
@@ -467,7 +467,7 @@ GameResult GameControl::StartGame()
 								(*itor)->Init();
 						}
 
-						// ¾²Ì¬Êı¾İ»á±£Áô,ĞèÒªÊÖ¶¯ÖØÖÃ
+						// é™æ€æ•°æ®ä¼šä¿ç•™,éœ€è¦æ‰‹åŠ¨é‡ç½®
 						EnemyBase::SetPause(false);
 
 						mCurrentStage++;
@@ -486,20 +486,20 @@ GameResult GameControl::StartGame()
 				}
 			}
 
-			// ÕûÕÅ»­²¼Ëõ·ÅÏÔÊ¾ image µ½Ö÷´°¿Ú
+			// æ•´å¼ ç”»å¸ƒç¼©æ”¾æ˜¾ç¤º image åˆ°ä¸»çª—å£
 			StretchBlt(mDes_hdc, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, mImage_hdc, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, SRCCOPY);
 			FlushBatchDraw();
 			return GameResult::Victory;
 		}
 
-		// ÉÏÉıµÄ GAMEOVER ×ÖÑù
+		// ä¸Šå‡çš„ GAMEOVER å­—æ ·
 		if (mShowGameOverAfterScorePanel)
 		{
 			StretchBlt(mImage_hdc, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, GetImageHDC(&mBlackBackgroundImage),
 				0, 0, CENTER_WIDTH, CENTER_HEIGHT, SRCCOPY);
 			BitBlt(mImage_hdc, 66, msgoas_y, 124, 80, GetImageHDC(&msgoas_image), 0, 0, SRCCOPY);
 
-			// ÕûÕÅ»­²¼Ëõ·ÅÏÔÊ¾ image µ½Ö÷´°¿Ú
+			// æ•´å¼ ç”»å¸ƒç¼©æ”¾æ˜¾ç¤º image åˆ°ä¸»çª—å£
 			StretchBlt(mDes_hdc, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, mImage_hdc, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, SRCCOPY);
 			FlushBatchDraw();
 
@@ -518,32 +518,32 @@ GameResult GameControl::StartGame()
 
 		AddEnemy();
 
-		// ¸üĞÂÓÒ±ßÃæ°åµÄÊı¾İ, ´ıÅĞ¶Ï, ÒòÎª²»ĞèÒª¾­³£¸üĞÂ mImage_hdc
+		// æ›´æ–°å³è¾¹é¢æ¿çš„æ•°æ®, å¾…åˆ¤æ–­, å› ä¸ºä¸éœ€è¦ç»å¸¸æ›´æ–° mImage_hdc
 		RefreshRightPanel();
 
-		// ¸üĞÂÖĞĞÄÓÎÏ·ÇøÓò: mCenter_hdc
+		// æ›´æ–°ä¸­å¿ƒæ¸¸æˆåŒºåŸŸ: mCenter_hdc
 		RefreshCenterPanel();
 
-		// ½«ÖĞĞÄ»­²¼Ó¡µ½Ö÷»­²¼ mImage_hdc ÉÏ
+		// å°†ä¸­å¿ƒç”»å¸ƒå°åˆ°ä¸»ç”»å¸ƒ mImage_hdc ä¸Š
 		BitBlt( mImage_hdc, CENTER_X, CENTER_Y, CENTER_WIDTH, CENTER_HEIGHT, mCenter_hdc, 0, 0, SRCCOPY );
-		// ÕûÕÅ»­²¼Ëõ·ÅÏÔÊ¾ image µ½Ö÷´°¿Ú
+		// æ•´å¼ ç”»å¸ƒç¼©æ”¾æ˜¾ç¤º image åˆ°ä¸»çª—å£
 		StretchBlt( mDes_hdc, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, mImage_hdc, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, SRCCOPY );
 		FlushBatchDraw();
 	}
 
-	// Êı¾İ±ä»¯, ²»ÄÜÉæ¼°»æÍ¼²Ù×÷
+	// æ•°æ®å˜åŒ–, ä¸èƒ½æ¶‰åŠç»˜å›¾æ“ä½œ
 	RefreshData();
 
 	return GameResult::Victory;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
-///////////////////////// Ë½ÓĞº¯Êı,±¾ÀàÊ¹ÓÃ //////////////////////////////////////////
+///////////////////////// ç§æœ‰å‡½æ•°,æœ¬ç±»ä½¿ç”¨ //////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
 void GameControl::CutStage()
 {
-	// »ÒÉ«±³¾°
+	// ç°è‰²èƒŒæ™¯
 	StretchBlt(mImage_hdc, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT,
 		GetImageHDC(&mGrayBackgroundImage), 0, 0, 66, 66, SRCCOPY);
 
@@ -562,18 +562,18 @@ void GameControl::CutStage()
 
 void GameControl::ShowStage()
 {
-	// »ÒÉ«±³¾°
+	// ç°è‰²èƒŒæ™¯
 	StretchBlt(mImage_hdc, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT,
 		GetImageHDC(&mGrayBackgroundImage), 0, 0, 66, 66, SRCCOPY);
 
 	 
 	TransparentBlt(mImage_hdc, 97, 103, 39, 7, GetImageHDC(&mCurrentStageImage), 0, 0, 39, 7, 0xffffff);
 
-	// [1-9] ¹Ø¿¨£¬µ¥¸öÊı×Ö
+	// [1-9] å…³å¡ï¼Œå•ä¸ªæ•°å­—
 	if (mCurrentStage < 10)
 		TransparentBlt(mImage_hdc, 157, 103, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE,
 			GetImageHDC(&mBlackNumberImage), BLACK_NUMBER_SIZE * mCurrentStage, 0, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, 0xffffff);
-	else	// 10,11,12 .. Ë«Î»Êı¹Ø¿¨
+	else	// 10,11,12 .. åŒä½æ•°å…³å¡
 	{
 		TransparentBlt(mImage_hdc, 157, 103, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE,
 			GetImageHDC(&mBlackNumberImage), BLACK_NUMBER_SIZE * (mCurrentStage / 10), 0, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, 0xffffff);
@@ -592,7 +592,7 @@ void GameControl::ShowStage()
 //
 void GameControl::ClearSignBox()
 {
-	// ³õÊ¼»¯±ê¼Ç¸÷ÖÖ¸ñ×Ó
+	// åˆå§‹åŒ–æ ‡è®°å„ç§æ ¼å­
 	int x = 0, y = 0;
 	for (int i = 0; i < 26; i++)
 	{
@@ -600,11 +600,11 @@ void GameControl::ClearSignBox()
 		{
 			mBoxMarkStruct->prop_8[i][j] = _EMPTY;
 			mBoxMarkStruct->box_8[i][j] = _EMPTY;	// 26*26
-			SignBox_4(i, j, _EMPTY);		// ±ê¼Ç 26*26 ºÍ 52*52 ¸ñ×Ó
+			SignBox_4(i, j, _EMPTY);		// æ ‡è®° 26*26 å’Œ 52*52 æ ¼å­
 		}
 	}
 
-	// ±ê¼Ç´ó±¾Óª
+	// æ ‡è®°å¤§æœ¬è¥
 	for (int i = 23; i < 26; i++)
 	{
 		for (int j = 11; j < 15; j++)
@@ -612,7 +612,7 @@ void GameControl::ClearSignBox()
 			if (i >= 24 && j >= 12 && j <= 13)
 				mBoxMarkStruct->box_8[i][j] = CAMP_SIGN;
 			else
-				mBoxMarkStruct->box_8[i][j] = _WALL;			// Äñ³²ÖÜÎ§ÊÇ _WALL
+				mBoxMarkStruct->box_8[i][j] = _WALL;			// é¸Ÿå·¢å‘¨å›´æ˜¯ _WALL
 		}
 	}
 }
@@ -620,7 +620,7 @@ void GameControl::ClearSignBox()
 //
 void GameControl::InitSignBox()
 {
-	// ³õÊ¼»¯±ê¼Ç¸÷ÖÖ¸ñ×Ó
+	// åˆå§‹åŒ–æ ‡è®°å„ç§æ ¼å­
 	int x = 0, y = 0;
 	for (int i = 0; i < 26; i++)
 	{
@@ -628,11 +628,11 @@ void GameControl::InitSignBox()
 		{
 			mBoxMarkStruct->prop_8[i][j] = _EMPTY;
 			mBoxMarkStruct->box_8[i][j] = mMap.buf[i][j] - '0';	// 26*26
-			SignBox_4(i, j, mMap.buf[i][j] - '0');		// ±ê¼Ç 26*26 ºÍ 52*52 ¸ñ×Ó
+			SignBox_4(i, j, mMap.buf[i][j] - '0');		// æ ‡è®° 26*26 å’Œ 52*52 æ ¼å­
 		}
 	}
 
-	// ±ê¼Ç´ó±¾Óª
+	// æ ‡è®°å¤§æœ¬è¥
 	for (int i = 23; i < 26; i++)
 	{
 		for (int j = 11; j < 15; j++)
@@ -640,12 +640,12 @@ void GameControl::InitSignBox()
 			if (i >= 24 && j >= 12 && j <= 13)
 				mBoxMarkStruct->box_8[i][j] = CAMP_SIGN;
 			else
-				mBoxMarkStruct->box_8[i][j] = _WALL;			// Äñ³²ÖÜÎ§ÊÇ _WALL
+				mBoxMarkStruct->box_8[i][j] = _WALL;			// é¸Ÿå·¢å‘¨å›´æ˜¯ _WALL
 		}
 	}
 }
 
-// ´ıĞŞ¸Ä, Ìí¼ÓµÄµĞ»úÖÖÀàĞèÒªĞŞ¸Ä
+// å¾…ä¿®æ”¹, æ·»åŠ çš„æ•Œæœºç§ç±»éœ€è¦ä¿®æ”¹
 void GameControl::AddEnemy()
 {
 	int size = EnemyList.size();
@@ -665,7 +665,7 @@ void GameControl::AddEnemy()
 	else
 		level = 3;
 
-	// Ã¿¸ö5¼Ü³ıÒ»¼ÜµÀ¾ßÌ¹¿Ë
+	// æ¯ä¸ª5æ¶é™¤ä¸€æ¶é“å…·å¦å…‹
 	if (size % 5 == 4)
 		kind = TANK_KIND::PROP;
 	else
@@ -694,7 +694,7 @@ void GameControl::AddEnemy()
 	}
 }
 
-// Ìá¹©8*8 µÄ×óÉÏ½ÇË÷Òı, ±ê¼ÇÀïÃæ4¸ö 4*4 µÄ¸ñ×Ó
+// æä¾›8*8 çš„å·¦ä¸Šè§’ç´¢å¼•, æ ‡è®°é‡Œé¢4ä¸ª 4*4 çš„æ ¼å­
 void GameControl::SignBox_4(int i, int j, int sign_val)
 {
 	int temp_i[4] = { 2 * i, 2 * i + 1, 2 * i, 2 * i + 1 };
@@ -706,27 +706,27 @@ void GameControl::SignBox_4(int i, int j, int sign_val)
 
 // 
 /***************************************************
-* Êı¾İ¸üĞÂ, ²»Éæ¼°»æÍ¼²Ù×÷!!
-* ¸üĞÂËùÓĞ¶«Î÷µÄ×ø±ê£¬ÏÂÒ»´ÎÑ­»·ÌåÖĞ½«ÔÚĞÂ×ó±ß»æÍ¼£¬ÊµÏÖÔË¶¯
+* æ•°æ®æ›´æ–°, ä¸æ¶‰åŠç»˜å›¾æ“ä½œ!!
+* æ›´æ–°æ‰€æœ‰ä¸œè¥¿çš„åæ ‡ï¼Œä¸‹ä¸€æ¬¡å¾ªç¯ä½“ä¸­å°†åœ¨æ–°å·¦è¾¹ç»˜å›¾ï¼Œå®ç°è¿åŠ¨
 ****************************************************/
 bool GameControl::RefreshData()
 {
 	if (GetAsyncKeyState(27) & 0x8000)
 		return false;
 
-	// ¼ì²âÍæ¼ÒÊÇ·ñ»ñµÃ 'Ê±ÖÓ' ¾²Ö¹µÀ¾ß
+	// æ£€æµ‹ç©å®¶æ˜¯å¦è·å¾— 'æ—¶é’Ÿ' é™æ­¢é“å…·
 	if (PlayerBase::IsGetTimeProp())
 	{
 		mEnemyPause = true;
-		mEnemyPauseTimer.Init();		// ÖØÖÃ t1 = t2
+		mEnemyPauseTimer.Init();		// é‡ç½® t1 = t2
 		//.mEnemyPauseCounter = 0;
 		EnemyBase::SetPause(true);
 	}
 
-	// Ñ­»·²ù×ÓµÀ¾ßÂß¼­
+	// å¾ªç¯é“²å­é“å…·é€»è¾‘
 	PlayerBase::IsGetShvelProp();
 
-	// Íæ¼Ò»ñµÃµØÀ×µÀ¾ß
+	// ç©å®¶è·å¾—åœ°é›·é“å…·
 	for (list<PlayerBase*>::iterator itor = PlayerList.begin(); itor != PlayerList.end(); itor++)
 	{
 		if ((*itor)->IsGetBombProp())
@@ -738,7 +738,7 @@ bool GameControl::RefreshData()
 					mKillEnemyNum++;
 					mCurMovingTankNumber--;
 
-					// Íæ¼Ò¼ÇÂ¼ÏûÃğµÄµĞ»úÊıÁ¿
+					// ç©å®¶è®°å½•æ¶ˆç­çš„æ•Œæœºæ•°é‡
 					(*itor)->AddKillEnemyNum((*EnemyItor)->GetLevel());
 
 					if (mKillEnemyNum == 20)
@@ -751,14 +751,14 @@ bool GameControl::RefreshData()
 		}
 	}
 
-	// Íæ¼Ò, ²»ÄÜ°üº¬»æÍ¼²Ù×÷! ÄÚº¬¼ÆÊ±Æ÷
+	// ç©å®¶, ä¸èƒ½åŒ…å«ç»˜å›¾æ“ä½œ! å†…å«è®¡æ—¶å™¨
 	for (list<PlayerBase*>::iterator itor = PlayerList.begin(); itor != PlayerList.end(); itor++)
 	{
-		// Äñ³²±»ÏûÃğÍæ¼ÒÍ£Ö¹ÒÆ¶¯
+		// é¸Ÿå·¢è¢«æ¶ˆç­ç©å®¶åœæ­¢ç§»åŠ¨
 		if (!mGameOverFlag)
 			(*itor)->PlayerControl();
 
-		// Íæ¼Ò×Óµ¯»÷ÖĞ½á¹û
+		// ç©å®¶å­å¼¹å‡»ä¸­ç»“æœ
 		BulletShootKind kind = (*itor)->BulletMoving(mCenter_hdc);
 		switch (kind)
 		{
@@ -767,7 +767,7 @@ bool GameControl::RefreshData()
 			mGameOverY = CENTER_HEIGHT;
 			mGameOverFlag = true;
 
-			// ´ó±¾Óª±¬Õ¨
+			// å¤§æœ¬è¥çˆ†ç‚¸
 			mCampDie = true;
 			mBlast.SetBlasting(11, 23);
 
@@ -776,7 +776,7 @@ bool GameControl::RefreshData()
 			MciSound::PlayMovingSound(false);
 			break;
 
-		// ±éÀú±»»÷ÖĞµÄÍæ¼Ò È»ºóÔİÍ£Ëü
+		// éå†è¢«å‡»ä¸­çš„ç©å®¶ ç„¶åæš‚åœå®ƒ
 		case BulletShootKind::Player_1:
 			for (list<PlayerBase*>::iterator i = PlayerList.begin(); i != PlayerList.end(); i++)
 			{
@@ -785,7 +785,7 @@ bool GameControl::RefreshData()
 			}
 			break;
 
-		// ±éÀú±»»÷ÖĞµÄÍæ¼Ò È»ºóÔİÍ£Ëü
+		// éå†è¢«å‡»ä¸­çš„ç©å®¶ ç„¶åæš‚åœå®ƒ
 		case BulletShootKind::Player_2:
 			for (list<PlayerBase*>::iterator i = PlayerList.begin(); i != PlayerList.end(); i++)
 			{
@@ -798,7 +798,7 @@ bool GameControl::RefreshData()
 		}
 	}
 
-	// µĞ»ú, ´Ë´¦²»ÄÜ°üº¬¼Æ»æÍ¼²Ù×÷, ÄÚº¬¼ÆÊ±Æ÷, ²»È»ÄÇ»áµ¼ÖÂ¼ÆÊ±Æ÷ÓëÖ÷¼ÆÊ±Æ÷²»Ò»ÖÂ,µ¼ÖÂÊ§Ö¡
+	// æ•Œæœº, æ­¤å¤„ä¸èƒ½åŒ…å«è®¡ç»˜å›¾æ“ä½œ, å†…å«è®¡æ—¶å™¨, ä¸ç„¶é‚£ä¼šå¯¼è‡´è®¡æ—¶å™¨ä¸ä¸»è®¡æ—¶å™¨ä¸ä¸€è‡´,å¯¼è‡´å¤±å¸§
 	for (list<EnemyBase*>::iterator EnemyItor = EnemyList.begin(); EnemyItor != EnemyList.end(); EnemyItor++)
 	{
 		(*EnemyItor)->ShootBullet();
@@ -820,7 +820,7 @@ bool GameControl::RefreshData()
 
 		case BulletShootKind::Camp:
 
-			// Èç¹ûÖ®Ç°Ã»ÓĞÉèÖÃ¹ı¸Ã flag (Íæ¼Ò±»ÏûÃğÍêhiÉèÖÃ¸Ã flag, ´ËÊ±²»ÓÃÔÙ´ÎÉèÖÃ)
+			// å¦‚æœä¹‹å‰æ²¡æœ‰è®¾ç½®è¿‡è¯¥ flag (ç©å®¶è¢«æ¶ˆç­å®Œhiè®¾ç½®è¯¥ flag, æ­¤æ—¶ä¸ç”¨å†æ¬¡è®¾ç½®)
 			if (mGameOverFlag == false)
 			{
 				mGameOverX = CENTER_WIDTH / 2 - GAMEOVER_WIDTH / 2;
@@ -828,7 +828,7 @@ bool GameControl::RefreshData()
 				mGameOverFlag = true;
 			}
 
-			// ´ó±¾Óª±¬Õ¨
+			// å¤§æœ¬è¥çˆ†ç‚¸
 			mCampDie = true;
 			mBlast.SetBlasting(11, 23);
 
@@ -841,7 +841,7 @@ bool GameControl::RefreshData()
 			break;
 		}
 
-		// Èç¹ûµĞ»úÔİÍ£
+		// å¦‚æœæ•Œæœºæš‚åœ
 		if (mEnemyPause == false)
 		{
 			(*EnemyItor)->TankMoving(mCenter_hdc);
@@ -858,10 +858,10 @@ bool GameControl::RefreshData()
 
 void GameControl::RefreshRightPanel()
 {
-	// »ÒÉ«±³¾°
+	// ç°è‰²èƒŒæ™¯
 	StretchBlt(mImage_hdc, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, GetImageHDC(&mGrayBackgroundImage), 0, 0, 66, 66, SRCCOPY);
 
-	// ÏÔÊ¾µĞ»úÊıÁ¿Í¼±ê
+	// æ˜¾ç¤ºæ•Œæœºæ•°é‡å›¾æ ‡
 	int x[2] = {233, 241};
 	int n, index;
 	for ( int i = 0; i < mRemainEnemyTankNumber; i++ )
@@ -870,7 +870,7 @@ void GameControl::RefreshRightPanel()
 		index = i % 2;
 
 		TransparentBlt( mImage_hdc, x[index], 19 + n * 8, ENEMY_TANK_ICO_SIZE, ENEMY_TANK_ICO_SIZE, 
-			GetImageHDC(&mEnemyTankIcoImage), 0, 0, ENEMY_TANK_ICO_SIZE, ENEMY_TANK_ICO_SIZE, 0xffffff );	// ×¢ÒâÕâ¸öÍ¼±êÓĞºÚÉ«²¿·Ö
+			GetImageHDC(&mEnemyTankIcoImage), 0, 0, ENEMY_TANK_ICO_SIZE, ENEMY_TANK_ICO_SIZE, 0xffffff );	// æ³¨æ„è¿™ä¸ªå›¾æ ‡æœ‰é»‘è‰²éƒ¨åˆ†
 	}
 	
 	for (list<PlayerBase*>::iterator itor = PlayerList.begin(); itor != PlayerList.end(); itor++)
@@ -878,15 +878,15 @@ void GameControl::RefreshRightPanel()
 		(*itor)->DrawPlayerTankIco(mImage_hdc);
 	}
 
-	// Æì×Ó
+	// æ——å­
 	TransparentBlt(mImage_hdc, 232, 177, FLAG_ICO_SIZE_X, FLAG_ICO_SIZE_Y,
-		GetImageHDC(&mFlagImage), 0, 0, FLAG_ICO_SIZE_X, FLAG_ICO_SIZE_Y, 0xffffff);	// ×¢ÒâÍ¼±êÄÚÓĞºÚÉ«²¿·Ö
+		GetImageHDC(&mFlagImage), 0, 0, FLAG_ICO_SIZE_X, FLAG_ICO_SIZE_Y, 0xffffff);	// æ³¨æ„å›¾æ ‡å†…æœ‰é»‘è‰²éƒ¨åˆ†
 
-	// ¹Ø¿¨
+	// å…³å¡
 	if (mCurrentStage < 10)
 		TransparentBlt(mImage_hdc, 238, 193, 7, 7, GetImageHDC(&mBlackNumberImage),
 			BLACK_NUMBER_SIZE * mCurrentStage, 0, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, 0xffffff);
-	else	// 10,11,12 .. Ë«Î»Êı¹Ø¿¨
+	else	// 10,11,12 .. åŒä½æ•°å…³å¡
 	{
 		TransparentBlt(mImage_hdc, 233, 193, 7, 7, GetImageHDC(&mBlackNumberImage),
 			BLACK_NUMBER_SIZE * (mCurrentStage / 10), 0, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, 0xffffff);
@@ -895,24 +895,24 @@ void GameControl::RefreshRightPanel()
 	}
 }
 
-// ¸üĞÂÖĞ¼äÓÎÏ·ÇøÓò
+// æ›´æ–°ä¸­é—´æ¸¸æˆåŒºåŸŸ
 void GameControl::RefreshCenterPanel()
 {
-		BitBlt(mCenter_hdc, 0, 0, CENTER_WIDTH, CENTER_HEIGHT, GetImageHDC(&mBlackBackgroundImage), 0, 0, SRCCOPY);// ÖĞĞÄºÚÉ«±³¾°ÓÎÏ·Çø
+		BitBlt(mCenter_hdc, 0, 0, CENTER_WIDTH, CENTER_HEIGHT, GetImageHDC(&mBlackBackgroundImage), 0, 0, SRCCOPY);// ä¸­å¿ƒé»‘è‰²èƒŒæ™¯æ¸¸æˆåŒº
 
-	   // ËÄ½ÇĞÇÉÁË¸¿ØÖÆ
+	   // å››è§’æ˜Ÿé—ªçƒæ§åˆ¶
 		for (list<EnemyBase*>::iterator EnemyItor = EnemyList.begin(); EnemyItor != EnemyList.end(); EnemyItor++)
 		{
-			// Èç¹ûµ±Ç°µĞ»ú»¹Ã»ÓĞ³öÏÖ, ²»»á±éÀúÏÂÒ»¼ÜµĞ»ú
+			// å¦‚æœå½“å‰æ•Œæœºè¿˜æ²¡æœ‰å‡ºç°, ä¸ä¼šéå†ä¸‹ä¸€æ¶æ•Œæœº
 			Star_State result = (*EnemyItor)->ShowStar(mCenter_hdc, mRemainEnemyTankNumber);
 			if (result != Star_State::Tank_Out)
 				break;
 		}
 
-		/* ¿ªÊ¼¸ù¾İÊı¾İÎÄ¼ş»æÖÆµØÍ¼
-		* »®·ÖÎª BOX_SIZE x BOX_SIZE µÄ¸ñ×Ó
-		* x×ø±ê£º j*BOX_SIZE
-		* y×ø±ê£º i*BOX_SIZE
+		/* å¼€å§‹æ ¹æ®æ•°æ®æ–‡ä»¶ç»˜åˆ¶åœ°å›¾
+		* åˆ’åˆ†ä¸º BOX_SIZE x BOX_SIZE çš„æ ¼å­
+		* xåæ ‡ï¼š j*BOX_SIZE
+		* yåæ ‡ï¼š i*BOX_SIZE
 		*/
 		int x = 0, y = 0;
 		for (int i = 0; i < 26; i++)
@@ -941,7 +941,7 @@ void GameControl::RefreshCenterPanel()
 			}
 		}
 
-		// ¼ì²â±»Ïú»ÙµÄÕÏ°­Îï, »æÖÆºÚÉ«Í¼Æ¬²Á³ı
+		// æ£€æµ‹è¢«é”€æ¯çš„éšœç¢ç‰©, ç»˜åˆ¶é»‘è‰²å›¾ç‰‡æ“¦é™¤
 		for (int i = 0; i < 52; i++)
 		{
 			for (int j = 0; j < 52; j++)
@@ -957,20 +957,20 @@ void GameControl::RefreshCenterPanel()
 		for (list<PlayerBase*>::iterator itor = PlayerList.begin(); itor != PlayerList.end(); itor++)
 		{
 			(*itor) ->ShowStar(mCenter_hdc);
-			(*itor)->DrawPlayerTank(mCenter_hdc);		// Ì¹¿Ë
+			(*itor)->DrawPlayerTank(mCenter_hdc);		// å¦å…‹
 			(*itor)->DrawBullet(mCenter_hdc);
 			CheckKillEnemy(*itor);
 			(*itor)->CheckShowGameOver(mCenter_hdc);
 		}
 
-		// µĞ»ú
+		// æ•Œæœº
 		for (list<EnemyBase*>::iterator EnemyItor = EnemyList.begin(); EnemyItor != EnemyList.end(); EnemyItor++)
 		{
 			(*EnemyItor)->DrawTank(mCenter_hdc);
 			(*EnemyItor)->DrawBullet(mCenter_hdc);
 		}
 
-		// É­ÁÖ
+		// æ£®æ—
 		for (int i = 0; i < 26; i++)
 		{
 			for (int j = 0; j < 26; j++)
@@ -982,18 +982,18 @@ void GameControl::RefreshCenterPanel()
 			}
 		}
 
-		// µĞ»ú×Óµ¯\Ì¹¿Ë±¬Õ¨Í¼, ²»ÄÜÖØºÏ
+		// æ•Œæœºå­å¼¹\å¦å…‹çˆ†ç‚¸å›¾, ä¸èƒ½é‡åˆ
 		for (list<EnemyBase*>::iterator EnemyItor = EnemyList.begin(); EnemyItor != EnemyList.end(); EnemyItor++)
 		{
 			(*EnemyItor)->Bombing(mCenter_hdc);
 
-			// ±¬Õ¨Íê±Ï, ÒÆ³ıµĞ»ú
+			// çˆ†ç‚¸å®Œæ¯•, ç§»é™¤æ•Œæœº
 			if ((*EnemyItor)->Blasting(mCenter_hdc))
 			{
 			}
 		}
 
-		// Èç¹û¸ÃµĞ»ú»÷ÖĞ´ó±¾Óª
+		// å¦‚æœè¯¥æ•Œæœºå‡»ä¸­å¤§æœ¬è¥
 		/*if (mGameOverFlag)
 		{
 			if (mBlast.canBlast == false)
@@ -1011,9 +1011,9 @@ void GameControl::RefreshCenterPanel()
 		for (list<PlayerBase*>::iterator itor = PlayerList.begin(); itor != PlayerList.end(); itor++)
 		{
 			(*itor)->Bombing(mCenter_hdc);
-			if ((*itor)->Blasting(mCenter_hdc) == true)		// Íæ¼ÒÉúÃüÓÃ¹â
+			if ((*itor)->Blasting(mCenter_hdc) == true)		// ç©å®¶ç”Ÿå‘½ç”¨å…‰
 			{
-				// Èç¹ûÊÇË«ÈËÍæ¼Ò, ²¢ÇÒÓĞÒ»¸öÍæ¼Ò»¹Ã»ÓĞ±»ÏûÃğ, ÄÇÃ´µ±Ç°Õâ¸ö±»ÏûÃğµÄÍæ¼Ò¾ÍÏÔÊ¾ gameover ×ÖÑù
+				// å¦‚æœæ˜¯åŒäººç©å®¶, å¹¶ä¸”æœ‰ä¸€ä¸ªç©å®¶è¿˜æ²¡æœ‰è¢«æ¶ˆç­, é‚£ä¹ˆå½“å‰è¿™ä¸ªè¢«æ¶ˆç­çš„ç©å®¶å°±æ˜¾ç¤º gameover å­—æ ·
 				if (PlayerList.size() == 2 && (PlayerList.front()->IsLifeEnd() == false || PlayerList.back()->IsLifeEnd() == false))
 					(*itor)->SetShowGameover();
 			}
@@ -1021,7 +1021,7 @@ void GameControl::RefreshCenterPanel()
 				player_all_die = false;
 		}
 
-		// Íæ¼Ò±»ÏûÃğÍê
+		// ç©å®¶è¢«æ¶ˆç­å®Œ
 		if (player_all_die && mGameOverFlag == false)
 		{
 			mGameOverX = CENTER_WIDTH / 2 - GAMEOVER_WIDTH / 2;
@@ -1032,16 +1032,16 @@ void GameControl::RefreshCenterPanel()
 			MciSound::PlayMovingSound(false);
 		}
 
-		// µÀ¾ßÉÁË¸, ÄÚ²¿×Ô¶¨ÒåÊ±ÖÓ
+		// é“å…·é—ªçƒ, å†…éƒ¨è‡ªå®šä¹‰æ—¶é’Ÿ
 		PlayerBase::ShowProp(mCenter_hdc);
 
-		// ´ó±¾Óª
-		if (!mCampDie)		// Èç¹ûÃ»±¬Õ¨
+		// å¤§æœ¬è¥
+		if (!mCampDie)		// å¦‚æœæ²¡çˆ†ç‚¸
 		{
 			TransparentBlt(mCenter_hdc, BOX_SIZE * 12, BOX_SIZE * 24, BOX_SIZE * 2, BOX_SIZE * 2,
 				GetImageHDC(&mCamp[0]), 0, 0, BOX_SIZE * 2, BOX_SIZE * 2, 0x000000);
 		}
-		else	// ÏÔÊ¾±»´İ»ÙµÄcamp
+		else	// æ˜¾ç¤ºè¢«æ‘§æ¯çš„camp
 		{
 			TransparentBlt(mCenter_hdc, BOX_SIZE * 12, BOX_SIZE * 24, BOX_SIZE * 2, BOX_SIZE * 2,
 				GetImageHDC(&mCamp[1]), 0, 0, BOX_SIZE * 2, BOX_SIZE * 2, 0x000000);
@@ -1053,11 +1053,11 @@ void GameControl::RefreshCenterPanel()
 		IsGameOver();
 }
 
-// ¶ÁÈ¡PlayerBase ÄÚµÄÊı¾İ, ÏûÃğµĞ»ú
+// è¯»å–PlayerBase å†…çš„æ•°æ®, æ¶ˆç­æ•Œæœº
 void GameControl::CheckKillEnemy(PlayerBase* pb)
 {
 	int bullet[2] = {0, 0};
-	pb->GetKillEnemy(bullet[0], bullet[1]);		// »ñÈ¡Íæ¼Ò»÷ÖĞµÄµĞ»úid, ´æ´¢½ø bullet[2] ÄÚ
+	pb->GetKillEnemy(bullet[0], bullet[1]);		// è·å–ç©å®¶å‡»ä¸­çš„æ•Œæœºid, å­˜å‚¨è¿› bullet[2] å†…
 
 	for (int i = 0; i < 2; i++)
 	{
@@ -1065,17 +1065,17 @@ void GameControl::CheckKillEnemy(PlayerBase* pb)
 		{
 			for (list<EnemyBase*>::iterator EnemyItor = EnemyList.begin(); EnemyItor != EnemyList.end(); EnemyItor++)
 			{
-				if ((*EnemyItor)->GetId() == bullet[i] % 100)		// 100xx ºóÁ½Î»ÊÇ id
+				if ((*EnemyItor)->GetId() == bullet[i] % 100)		// 100xx åä¸¤ä½æ˜¯ id
 				{
-					// Èç¹ûÏûÃğµĞ»ú
+					// å¦‚æœæ¶ˆç­æ•Œæœº
 					if ((*EnemyItor)->BeKill(false))
 					{
 						mKillEnemyNum++;
 						mCurMovingTankNumber--;
-						if ((int)TANK_KIND::PROP == bullet[i] % 1000 / 100)		// »ñÈ¡°Ù·ÖÎ»µÄµĞ»úÖÖÀà
+						if ((int)TANK_KIND::PROP == bullet[i] % 1000 / 100)		// è·å–ç™¾åˆ†ä½çš„æ•Œæœºç§ç±»
 							PlayerBase::SetShowProp();
 
-						// Íæ¼Ò¼ÇÂ¼ÏûÃğµÄµĞ»úÊıÁ¿
+						// ç©å®¶è®°å½•æ¶ˆç­çš„æ•Œæœºæ•°é‡
 						pb->AddKillEnemyNum((*EnemyItor)->GetLevel());
 					}
 					if (mKillEnemyNum == 20)
@@ -1113,7 +1113,7 @@ void GameControl::IsGameOver()
 	}
 }
 
-// Èç¹ûµĞ»ú¶¼±»ÏûÃğ, ¸ô mWinCounter ºóÌø×ªµ½·ÖÊıÃæ°å
+// å¦‚æœæ•Œæœºéƒ½è¢«æ¶ˆç­, éš” mWinCounter åè·³è½¬åˆ°åˆ†æ•°é¢æ¿
 void GameControl::IsWinOver()
 {
 	if (mWin && mWinCounter++ > 210 && !mGameOverFlag && mShowScorePanel == false)
@@ -1136,7 +1136,7 @@ void GameControl::IsWinOver()
 		0, 0, CENTER_WIDTH, CENTER_HEIGHT, SRCCOPY);
 	BitBlt(mImage_hdc, 60, msgoas_y, 124, 80, GetImageHDC(&msgoas_image), 0, 0, SRCCOPY);
 
-	// ÕûÕÅ»­²¼Ëõ·ÅÏÔÊ¾ image µ½Ö÷´°¿Ú
+	// æ•´å¼ ç”»å¸ƒç¼©æ”¾æ˜¾ç¤º image åˆ°ä¸»çª—å£
 	StretchBlt(mDes_hdc, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, mImage_hdc, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, SRCCOPY);
 	FlushBatchDraw();
 

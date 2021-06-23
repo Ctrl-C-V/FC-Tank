@@ -2,9 +2,9 @@
 
 
 /*
-* Timer1()  ¿ªÊ¼µ÷ÓÃÒ»´Î
-* Timer2() Ñ­»·µ÷ÓÃ
-* IsTimeOut() Ñ­»·µ÷ÓÃ¼ì²âÊ±¼ä²îÊÇ·ñ´óÓÚÉèÖÃµÄÖµ
+* Timer1()  å¼€å§‹è°ƒç”¨ä¸€æ¬¡
+* Timer2() å¾ªç¯è°ƒç”¨
+* IsTimeOut() å¾ªç¯è°ƒç”¨æ£€æµ‹æ—¶é—´å·®æ˜¯å¦å¤§äºè®¾ç½®çš„å€¼
 */
 
 class TimeClock
@@ -13,21 +13,21 @@ public:
 	TimeClock();
 	~TimeClock() {}
 
-	/*ÉèÖÃÊ±¼ä²î, µ÷½ÚËÙ¶È*/
+	/*è®¾ç½®æ—¶é—´å·®, è°ƒèŠ‚é€Ÿåº¦*/
 	void SetDrtTime(double);
 
-	/*¸üĞÂ QPart1*/
+	/*æ›´æ–° QPart1*/
 	void Timer1();
 
-	void Init();		// ÖØÖÃ t1 = t2
+	void Init();		// é‡ç½® t1 = t2
 
-	/*±È½ÏÁ½¸ö¼ÆÊ±Ê±¼ä²î, ·µ»Ø true false ²¢ÖØÖÃÊ±¼ä²î*/
-	bool IsTimeOut();		// Ê±¼ä²îµ½
+	/*æ¯”è¾ƒä¸¤ä¸ªè®¡æ—¶æ—¶é—´å·®, è¿”å› true false å¹¶é‡ç½®æ—¶é—´å·®*/
+	bool IsTimeOut();		// æ—¶é—´å·®åˆ°
 
 
 private:
-	LARGE_INTEGER litmp;		// ¶¨Òå¸Ã½á¹¹ÌåµÄÒ»¸ö¶ÔÏó
-	LONGLONG QPart1, QPart2;	// ÓÃÓÚ»ñÈ¡½á¹¹ÌåÀïÃæµÄ QuadPart ³ÉÔ±
-	double dfFreq;				// Ê±ÖÓÆµÂÊ
-	double drtTime;				// ¶¨ÒåÊ±¼ä²î, ¾ö¶¨ÎïÌåÔË¶¯ËÙ¶È
+	LARGE_INTEGER litmp;		// å®šä¹‰è¯¥ç»“æ„ä½“çš„ä¸€ä¸ªå¯¹è±¡
+	LONGLONG QPart1, QPart2;	// ç”¨äºè·å–ç»“æ„ä½“é‡Œé¢çš„ QuadPart æˆå‘˜
+	double dfFreq;				// æ—¶é’Ÿé¢‘ç‡
+	double drtTime;				// å®šä¹‰æ—¶é—´å·®, å†³å®šç‰©ä½“è¿åŠ¨é€Ÿåº¦
 };

@@ -8,10 +8,10 @@ SelectPanel::SelectPanel( HDC des_hdc, HDC image_hdc)
 	mImage_hdc = image_hdc;
 	loadimage(&mSelect_player_image, _T("./res/big/select_player.gif"));
 
-	// Ñ¡ÔñÌ¹¿ËÊÖ±úÓÎ±ê
+	// é€‰æ‹©å¦å…‹æ‰‹æŸ„æ¸¸æ ‡
 	loadimage(&mSelectTankImage[0], _T("./res/big/0Player/m0-2-1.gif"));
 	loadimage(&mSelectTankImage[1], _T("./res/big/0Player/m0-2-2.gif"));
-	// »ÒÉ«±³¾°
+	// ç°è‰²èƒŒæ™¯
 	loadimage(&mGrayBackgroundImage, _T("./res/big/bg_gray.gif"));
 	loadimage(&mBlackNumberImage, _T("./res/big/black-number.gif"));
 
@@ -37,15 +37,15 @@ void SelectPanel::Init()
 	mCounter = 1;
 }
 
-// ÏÔÊ¾ÓÎÏ·¿ªÊ¼¿ØÖÆÃæ°å
+// æ˜¾ç¤ºæ¸¸æˆå¼€å§‹æ§åˆ¶é¢æ¿
 EnumSelectResult SelectPanel::ShowSelectPanel()
 {
-	cleardevice();		// ·ÀÖ¹ÓÎÏ·Ê§°Ü·ÖÊıÃæ°åºóÏÔÊ¾ GAMEOVER ²ĞÁôÆÁÄ»
+	cleardevice();		// é˜²æ­¢æ¸¸æˆå¤±è´¥åˆ†æ•°é¢æ¿åæ˜¾ç¤º GAMEOVER æ®‹ç•™å±å¹•
 
-	// Ñ¡ÔñÍæ¼ÒÃæ°åÉÏÉı¶¯»­
+	// é€‰æ‹©ç©å®¶é¢æ¿ä¸Šå‡åŠ¨ç”»
 	while (mSelect_player_image_y > 0)
 	{
-		// Èç¹ûÉÏÉı¹ı³Ì°´ÏÂ»Ø³µ¼ü£¬Ö±½Ó½áÊø¶¯»­£¬ÏÔÊ¾×îºó¶¨¸ñµÄÒ³Ãæ
+		// å¦‚æœä¸Šå‡è¿‡ç¨‹æŒ‰ä¸‹å›è½¦é”®ï¼Œç›´æ¥ç»“æŸåŠ¨ç”»ï¼Œæ˜¾ç¤ºæœ€åå®šæ ¼çš„é¡µé¢
 		if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 			mSelect_player_image_y = 0;
 
@@ -54,17 +54,17 @@ EnumSelectResult SelectPanel::ShowSelectPanel()
 		if ( mSelect_player_image_y < 0 )
 			mSelect_player_image_y = 0;
 
-		// »æÖÆÔÚ mImage_hdc ÉÏ
+		// ç»˜åˆ¶åœ¨ mImage_hdc ä¸Š
 		BitBlt(mImage_hdc, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, GetImageHDC(&mSelect_player_image), 0, 0, SRCCOPY);
 		
-		// ½« mImage_hdc »æÖÆµ½Ö÷´°¿Ú mDes_hdc ÉÏ
+		// å°† mImage_hdc ç»˜åˆ¶åˆ°ä¸»çª—å£ mDes_hdc ä¸Š
 		StretchBlt(mDes_hdc, 0, mSelect_player_image_y, WINDOW_WIDTH, WINDOW_HEIGHT, mImage_hdc, 0, 0 , CANVAS_WIDTH, CANVAS_HEIGHT, SRCCOPY);
-		FlushBatchDraw();	// Êä³ö´Ó Tank.cpp BeginBatchDraw(); ¿ªÊ¼µ½´Ë´¦µÄ»º´æ»æÍ¼£¬²ÅÄÜÏÔÊ¾µ½´°¿Ú£¬Ä¿µÄ£º±ÜÃâÉÁË¸
+		FlushBatchDraw();	// è¾“å‡ºä» Tank.cpp BeginBatchDraw(); å¼€å§‹åˆ°æ­¤å¤„çš„ç¼“å­˜ç»˜å›¾ï¼Œæ‰èƒ½æ˜¾ç¤ºåˆ°çª—å£ï¼Œç›®çš„ï¼šé¿å…é—ªçƒ
 	}
 
-	int temp = 0;					// ¿ØÖÆ°´¼üÏìÓ¦ËÙ¶È,²»ÄÜÌ«¿ì!
-	// Íæ¼Ò¿ÉÒÔ½øĞĞ ÉÏÏÂ¡¢»Ø³µ²Ù×÷£¬Ñ¡ÔñÓÎÏ·Ä£Ê½
-	// Íæ¼Ò¿ªÊ¼Ñ¡ÔñÓÎÏ·¹¦ÄÜ
+	int temp = 0;					// æ§åˆ¶æŒ‰é”®å“åº”é€Ÿåº¦,ä¸èƒ½å¤ªå¿«!
+	// ç©å®¶å¯ä»¥è¿›è¡Œ ä¸Šä¸‹ã€å›è½¦æ“ä½œï¼Œé€‰æ‹©æ¸¸æˆæ¨¡å¼
+	// ç©å®¶å¼€å§‹é€‰æ‹©æ¸¸æˆåŠŸèƒ½
 	while ( true )
 	{
 		Sleep(40);
@@ -96,23 +96,23 @@ EnumSelectResult SelectPanel::ShowSelectPanel()
 	}
 
 
-	// ÏìÓ¦Íæ¼ÒµÄÑ¡Ôñ
+	// å“åº”ç©å®¶çš„é€‰æ‹©
 	switch( mSelectIndex )
 	{
 	case 0:
-		// ÖØÖÃÊı¾İ, ÏÂ´Î²ÅÄÜÉÏÉı
+		// é‡ç½®æ•°æ®, ä¸‹æ¬¡æ‰èƒ½ä¸Šå‡
 		Init();
 		return OnePlayer;
 	case 1:
-		// ÖØÖÃÊı¾İ, ÏÂ´Î²ÅÄÜÉÏÉı
+		// é‡ç½®æ•°æ®, ä¸‹æ¬¡æ‰èƒ½ä¸Šå‡
 		Init();
 		return TwoPlayer;
 	case 2:
-		// ÖØÖÃÊı¾İ, ÏÂ´Î²ÅÄÜÉÏÉı
+		// é‡ç½®æ•°æ®, ä¸‹æ¬¡æ‰èƒ½ä¸Šå‡
 		Init();
 		return Custom;
 	default:
-		throw _T("void SelectPanel::ShowSelectPanel() Òì³£");
+		throw _T("void SelectPanel::ShowSelectPanel() å¼‚å¸¸");
 	}
 	return Error;
 }

@@ -4,14 +4,14 @@
 
 /////////////////////////////f///////////////////////////
 
-// µĞ»úÌ¹¿ËĞÅÏ¢
+// æ•Œæœºå¦å…‹ä¿¡æ¯
 TankInfo::TankInfo(byte tank_color, int enemy_level, bool notuse)
 {
 	//mTankDir = 1;
 	TCHAR c[100];
 	switch(tank_color)
 	{
-	case GRAY_TANK:		// »ÒÉ«Ì¹¿Ë
+	case GRAY_TANK:		// ç°è‰²å¦å…‹
 		for ( int i = 0; i < 4; i++ )
 		{
 			_stprintf_s(c, L"./res/big/gray-tank/%d-%d-1.gif", enemy_level + 1, i + 1 );
@@ -20,7 +20,7 @@ TankInfo::TankInfo(byte tank_color, int enemy_level, bool notuse)
 			loadimage(&mTankImage[i][1], c);
 		}
 		break;
-	case RED_TANK:		// ºìÉ«Ì¹¿Ë
+	case RED_TANK:		// çº¢è‰²å¦å…‹
 		for ( int i = 0; i < 4; i++ )
 		{
 			_stprintf_s(c, L"./res/big/red-tank/%d-%d-1.gif", enemy_level + 1, i + 1);
@@ -48,11 +48,11 @@ TankInfo::TankInfo(byte tank_color, int enemy_level, bool notuse)
 		}
 		break;
 	default:
-		throw _T("Òì³£ TankInfo::TankInfo(byte enemy_kind, int enemy_level)");
+		throw _T("å¼‚å¸¸ TankInfo::TankInfo(byte enemy_kind, int enemy_level)");
 	}
 }
 
-// Íæ¼ÒÌ¹¿ËĞÅÏ¢
+// ç©å®¶å¦å…‹ä¿¡æ¯
 TankInfo::TankInfo(byte player, byte level)
 {
 	switch(player)
@@ -73,7 +73,7 @@ TankInfo::TankInfo(byte player, byte level)
 		}
 		break;
 	default:
-		throw _T("ÊıÖµÔ½½ç, TankClass.cpp-> TankInfo construct function");
+		throw _T("æ•°å€¼è¶Šç•Œ, TankClass.cpp-> TankInfo construct function");
 	}
 }
 
@@ -87,7 +87,7 @@ IMAGE TankInfo::GetTankImage(byte dir, int index)
 }
 
 /////////////////////////////////////////////////////////
-// Íæ¼ÒÌ¹¿Ë¼¶±ğ
+// ç©å®¶å¦å…‹çº§åˆ«
 PlayerTank::PlayerTank( byte player )
 {
 	mMoveIndex = 0;
@@ -104,9 +104,9 @@ PlayerTank::~PlayerTank()
 	printf("PlayerTank::~PlayerTank() \n");
 }
 
-// ¶¨ÒåËæ»úË÷Òı, Ã¿Èı´Î¸ú»»Ò»¸ö¶¯×÷
+// å®šä¹‰éšæœºç´¢å¼•, æ¯ä¸‰æ¬¡è·Ÿæ¢ä¸€ä¸ªåŠ¨ä½œ
 IMAGE PlayerTank::GetTankImage(byte level, byte dir, bool moving)
-{							// Ö»»á¸³ÖµÒ»´Î
+{							// åªä¼šèµ‹å€¼ä¸€æ¬¡
 	mMoveIndex = moving ? mMoveIndex + 1 : 0;
 	return mTankInfo[level]->GetTankImage( dir, mMoveIndex );
 }

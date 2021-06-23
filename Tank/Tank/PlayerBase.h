@@ -3,9 +3,9 @@
 #include "struct.h"
 #include "TimeClock.h"
 
-/************* Íæ¼Ò¿ØÖÆ *************
-* Ò»¸öÍæ¼ÒÊµÀı»¯Ò»¸ö¶ÔÏó
-* ¸÷×Ô¹ÜÀí×Ô¼ºµÄÊı¾İ
+/************* ç©å®¶æ§åˆ¶ *************
+* ä¸€ä¸ªç©å®¶å®ä¾‹åŒ–ä¸€ä¸ªå¯¹è±¡
+* å„è‡ªç®¡ç†è‡ªå·±çš„æ•°æ®
 */
 
 class PlayerBase
@@ -17,258 +17,258 @@ public:
 	void Init();
 
 	/*
-	* GameControl ÄÚÑ­»·µ÷ÓÃ
+	* GameControl å†…å¾ªç¯è°ƒç”¨
 	*/
 	void DrawPlayerTankIco(const HDC& );
 
-	/* Íæ¼ÒÌ¹¿ËÉÁË¸³öÏÖ*/
+	/* ç©å®¶å¦å…‹é—ªçƒå‡ºç°*/
 	bool ShowStar(const HDC& center_hdc);
 
 	/*
-	* GameControl ÄÚÑ­»·µ÷ÓÃ
-	* ´¿»æÖÆÌ¹¿Ë²Ù×÷
+	* GameControl å†…å¾ªç¯è°ƒç”¨
+	* çº¯ç»˜åˆ¶å¦å…‹æ“ä½œ
 	*/
 	void DrawPlayerTank( const HDC& );
 
-	/*»æÖÆ×Óµ¯,ĞèÒªÓëÒÆ¶¯·Ö¿ª, ²»È»Ö÷Ñ­»·ÄÚ»áÊ§Ö¡, ÒòÎª²»Ò»¶¨Ã¿´Î»æÍ¼¶¼»áÒÆ¶¯*/
+	/*ç»˜åˆ¶å­å¼¹,éœ€è¦ä¸ç§»åŠ¨åˆ†å¼€, ä¸ç„¶ä¸»å¾ªç¯å†…ä¼šå¤±å¸§, å› ä¸ºä¸ä¸€å®šæ¯æ¬¡ç»˜å›¾éƒ½ä¼šç§»åŠ¨*/
 	void DrawBullet(const HDC&);
 
 	/*
-	* GameControl ÄÚÑ­»·µ÷ÓÃ
-	* ¼ì²â°´¼ü
+	* GameControl å†…å¾ªç¯è°ƒç”¨
+	* æ£€æµ‹æŒ‰é”®
 	*/
 	bool PlayerControl();
 
 	/*
-	* GameControl ÄÚÑ­»·µ÷ÓÃ,
-	* mBulletStruct[i].x = SHOOTABLE_X ×Óµ¯²ÅÔË¶¯
+	* GameControl å†…å¾ªç¯è°ƒç”¨,
+	* mBulletStruct[i].x = SHOOTABLE_X å­å¼¹æ‰è¿åŠ¨
 	*/
 	BulletShootKind BulletMoving(const HDC&);
 
 	/*
-	* GameControl ÄÚÑ­»·µ÷ÓÃ
-	* º¯ÊıÄÚÊÇ·ñÏÔÊ¾±¬Õ¨Ğ§¹ûÓÉ ¼ì²â×Óµ¯»÷ÖĞ µÄº¯Êı¾ö¶¨
+	* GameControl å†…å¾ªç¯è°ƒç”¨
+	* å‡½æ•°å†…æ˜¯å¦æ˜¾ç¤ºçˆ†ç‚¸æ•ˆæœç”± æ£€æµ‹å­å¼¹å‡»ä¸­ çš„å‡½æ•°å†³å®š
 	*/
 	void Bombing(const HDC&);
 
 	/*
-	* GameControl ÄÚµ÷ÓÃ, Í¨¹ı²ÎÊı»ñÈ¡±»»÷ÖĞµÄµĞ»ú id
-	* a : 1 ºÅ×Óµ¯»÷ÖĞµĞ»úµÄ id
-	* b : 2 ºÅ×Óµ¯»÷ÖĞµĞ»úµÄ id
+	* GameControl å†…è°ƒç”¨, é€šè¿‡å‚æ•°è·å–è¢«å‡»ä¸­çš„æ•Œæœº id
+	* a : 1 å·å­å¼¹å‡»ä¸­æ•Œæœºçš„ id
+	* b : 2 å·å­å¼¹å‡»ä¸­æ•Œæœºçš„ id
 	*/
 	void GetKillEnemy(int& a, int& b);
 
 	/*
-	* GameControl ÄÚÑ­»·¼ì²â¸ÃÖµ
-	* ¼ì²âÍæ¼ÒÊÇ·ñ»÷ÖĞ´ó±¾Óª
-	* º¯ÊıÄÚµÄ³ÉÔ± mIsShootCamp ÔÚ¼ì²â×Óµ¯»÷ÖĞµÄº¯ÊıÖĞ¸³Öµ
+	* GameControl å†…å¾ªç¯æ£€æµ‹è¯¥å€¼
+	* æ£€æµ‹ç©å®¶æ˜¯å¦å‡»ä¸­å¤§æœ¬è¥
+	* å‡½æ•°å†…çš„æˆå‘˜ mIsShootCamp åœ¨æ£€æµ‹å­å¼¹å‡»ä¸­çš„å‡½æ•°ä¸­èµ‹å€¼
 	*/
 	//bool IsShootCamp();
 
 	/*
-	* ÔÚ GameControl ÄÚ¼ì²âµ÷ÓÃ
-	* GameControl ÄÚÑ­»·µ÷ÓÃ EnemyBase->IsShootToPlayer() »ñÈ¡±»»÷ÖĞÍæ¼ÒµÄ id
-	* È»ºóµ÷ÓÃ¶ÔÓ¦Íæ¼ÒµÄ BeKill º¯Êı
-	* BeKill() ¿ØÖÆ±¬Õ¨Í¼ÏÔÊ¾
+	* åœ¨ GameControl å†…æ£€æµ‹è°ƒç”¨
+	* GameControl å†…å¾ªç¯è°ƒç”¨ EnemyBase->IsShootToPlayer() è·å–è¢«å‡»ä¸­ç©å®¶çš„ id
+	* ç„¶åè°ƒç”¨å¯¹åº”ç©å®¶çš„ BeKill å‡½æ•°
+	* BeKill() æ§åˆ¶çˆ†ç‚¸å›¾æ˜¾ç¤º
 	*/
 	void BeKill();
 
 	/*
-	* GameControl ÄÚÑ­»·µ÷ÓÃ
-	* BeKill ±»µ÷ÓÃºóÉèÖÃÒ»¸ö flag = true,
-	* ¸Ãº¯Êı¼ì²âÕâ¸ö flag È»ºóÏÔÊ¾±¬Õ¨Í¼
-	* ·µ»Ø true Íæ¼ÒÉúÃüÓÃ¹â
+	* GameControl å†…å¾ªç¯è°ƒç”¨
+	* BeKill è¢«è°ƒç”¨åè®¾ç½®ä¸€ä¸ª flag = true,
+	* è¯¥å‡½æ•°æ£€æµ‹è¿™ä¸ª flag ç„¶åæ˜¾ç¤ºçˆ†ç‚¸å›¾
+	* è¿”å› true ç©å®¶ç”Ÿå‘½ç”¨å…‰
 	*/
 	bool Blasting(const HDC&);
 
 	const int& GetID();
 
-	/*GameControl ÄÚµ÷ÓÃ, ¼ì²âÍæ¼ÒÊÇ·ñ»ñµÃÊ±¼äµÀ¾ß*/
+	/*GameControl å†…è°ƒç”¨, æ£€æµ‹ç©å®¶æ˜¯å¦è·å¾—æ—¶é—´é“å…·*/
 	static bool IsGetTimeProp();
 
-	// ²ù×ÓµÀ¾ßÑµ»°
+	// é“²å­é“å…·è®­è¯
 	static bool IsGetShvelProp();
 	bool IsGetBombProp();
 
-	/*ÔÚ gameControl ÄÚÑ­»·µ÷ÓÃ ¼ì²â²¢ÏÔÊ¾ÉÁË¸µÀ¾ß*/
+	/*åœ¨ gameControl å†…å¾ªç¯è°ƒç”¨ æ£€æµ‹å¹¶æ˜¾ç¤ºé—ªçƒé“å…·*/
 	static void ShowProp(const HDC&);
 
-	/*GameCnotrol ÄÚÑ­»·µ÷ÓÃ, º¯ÊıÄÚµ÷ÓÃ³ÉÔ±ScorePanel º¯ÊıÏÔÊ¾½á¹û*/
+	/*GameCnotrol å†…å¾ªç¯è°ƒç”¨, å‡½æ•°å†…è°ƒç”¨æˆå‘˜ScorePanel å‡½æ•°æ˜¾ç¤ºç»“æœ*/
 	bool ShowScorePanel(const HDC&);
 
-	/*GameControl ÄÚ¼ì²â×Óµ¯»÷ÖĞ½á¹ûÅĞ¶Ïµ÷ÓÃ,
-	ÉèÖÃÍæ¼ÒÔİÍ£ÒÆ¶¯*/
+	/*GameControl å†…æ£€æµ‹å­å¼¹å‡»ä¸­ç»“æœåˆ¤æ–­è°ƒç”¨,
+	è®¾ç½®ç©å®¶æš‚åœç§»åŠ¨*/
 	void SetPause();
 
 	/*
-	* GameControl ÄÚ CheckKillEnemy() ÄÚµ÷ÓÃ
-	* Èç¹û³É¹¦ÏûÃğµÀ¾ßµĞ»ú, ¾ÍÏÔÊ¾µÀ¾ß
+	* GameControl å†… CheckKillEnemy() å†…è°ƒç”¨
+	* å¦‚æœæˆåŠŸæ¶ˆç­é“å…·æ•Œæœº, å°±æ˜¾ç¤ºé“å…·
 	*/
 	static void SetShowProp();
 
-	/*GameControl ÄÚCheckKillEnemy() ÄÚµ÷ÓÃ,
-	¼ÇÂ¼Íæ¼ÒÏûÃğ²»Í¬¼¶±ğÀàĞÍµÄµĞ»úµÄÊıÁ¿*/
+	/*GameControl å†…CheckKillEnemy() å†…è°ƒç”¨,
+	è®°å½•ç©å®¶æ¶ˆç­ä¸åŒçº§åˆ«ç±»å‹çš„æ•Œæœºçš„æ•°é‡*/
 	void AddKillEnemyNum(byte enemy_level);
 
-	/*GameControl ÄÚÃ¿Ò»¹Ø½áÊøÏÔÊ¾·ÖÊıÃæ°åµÄÊ±ºòµ÷ÓÃ*/
+	/*GameControl å†…æ¯ä¸€å…³ç»“æŸæ˜¾ç¤ºåˆ†æ•°é¢æ¿çš„æ—¶å€™è°ƒç”¨*/
 	void ResetScorePanelData(const int& player_num, const int& stage);
 
-	/*Ê¤Àû½øÈëÏÂÒ»¹ØÊ±¼ì²â, ËÀÍöµÄÍæ¼Ò²»ÖØĞÂ³õÊ¼»¯, ÏÂÒ»¹Ø²»»á³öÏÖ*/
+	/*èƒœåˆ©è¿›å…¥ä¸‹ä¸€å…³æ—¶æ£€æµ‹, æ­»äº¡çš„ç©å®¶ä¸é‡æ–°åˆå§‹åŒ–, ä¸‹ä¸€å…³ä¸ä¼šå‡ºç°*/
 	bool IsLifeEnd();
 
-	/*GameCOntrol ÄÚÑ­»·µ÷ÓÃ, ÅĞ¶ÏÍæ¼ÒÉúÃüÖµ, ÏÔÊ¾GAMEOVER ×ÖÑù*/
+	/*GameCOntrol å†…å¾ªç¯è°ƒç”¨, åˆ¤æ–­ç©å®¶ç”Ÿå‘½å€¼, æ˜¾ç¤ºGAMEOVER å­—æ ·*/
 	void CheckShowGameOver(const HDC& );
 
-	/*GameControl ÄÚÍæ¼Ò blasting ½áÊøºóµ÷ÓÃ*/
+	/*GameControl å†…ç©å®¶ blasting ç»“æŸåè°ƒç”¨*/
 	void SetShowGameover();
 
 private:
 
 	/*
-	* ±ê¼Ç×Óµ¯Í·ËùÔÚµÄÒ»¸ö 4*4 ¸ñ×Ó
-	* ²ÎÊıÊÇ×Óµ¯Í¼Æ¬×óÉÏ½Ç×ø±ê
+	* æ ‡è®°å­å¼¹å¤´æ‰€åœ¨çš„ä¸€ä¸ª 4*4 æ ¼å­
+	* å‚æ•°æ˜¯å­å¼¹å›¾ç‰‡å·¦ä¸Šè§’åæ ‡
 	*/
 	void SignBullet(int, int, byte dir, int val);
 
-	/*Èç¹ûÓĞÉúÃüÖØĞÂ³öÉú*/
+	/*å¦‚æœæœ‰ç”Ÿå‘½é‡æ–°å‡ºç”Ÿ*/
 	void Reborn();
 
-	/*»ñÈ¡µ½µÀ¾ß, Ì¹¿ËÒÆ¶¯ÄÚ¼ì²âµ÷ÓÃ*/
+	/*è·å–åˆ°é“å…·, å¦å…‹ç§»åŠ¨å†…æ£€æµ‹è°ƒç”¨*/
 	void DispatchProp(int prop_kind);
 	/*
-	* PlayerControl() ÄÚµ÷ÓÃ
-	* ÅĞ¶Ï²¢¸ü¸Ä·½Ïò»òÕßÒÆ¶¯
-	* Í¬Ê±µ÷Õû×ø±êµ½¸ñ×ÓÕûÊı´¦, 
+	* PlayerControl() å†…è°ƒç”¨
+	* åˆ¤æ–­å¹¶æ›´æ”¹æ–¹å‘æˆ–è€…ç§»åŠ¨
+	* åŒæ—¶è°ƒæ•´åæ ‡åˆ°æ ¼å­æ•´æ•°å¤„, 
 	*/
 	void Move(int new_dir);	
 
 	/*
-	* Move() ÄÚµ÷ÓÃ
-	* ¼ì²âµ±Ç°·½ÏòÒÆ¶¯µÄ¿ÉÄÜĞÔ
+	* Move() å†…è°ƒç”¨
+	* æ£€æµ‹å½“å‰æ–¹å‘ç§»åŠ¨çš„å¯èƒ½æ€§
 	*/
 	bool CheckMoveable();
 
 	/*
-	* PlayerControl() ÄÚµ÷ÓÃ
-	* ·¢Éä id ºÅ×Óµ¯[0,1]
-	* °´ÏÂ J »ò 1 ¼üµ÷ÓÃ
+	* PlayerControl() å†…è°ƒç”¨
+	* å‘å°„ id å·å­å¼¹[0,1]
+	* æŒ‰ä¸‹ J æˆ– 1 é”®è°ƒç”¨
 	*/
 	bool ShootBullet(int bullet_id);
 
 	/*
-	* BulletMoving() ÄÚµ÷ÓÃ
-	* ¼ì²â×Óµ¯ÒÆ¶¯¹ı³ÌÊÇ·ñ»÷ÖĞ¶«Î÷
+	* BulletMoving() å†…è°ƒç”¨
+	* æ£€æµ‹å­å¼¹ç§»åŠ¨è¿‡ç¨‹æ˜¯å¦å‡»ä¸­ä¸œè¥¿
 	*/
 	BulletShootKind CheckBomb(int);
 
 	/*
-	* CheckBomb() ÄÚ»÷ÖĞÕÏ°­ÎïÊ±µ÷ÓÃ
-	* id  : ×Óµ¯ id
-	* x,y : ×Óµ¯Í¹³öµãµÄ×ø±ê, ¸ù¾İ²»Í¬·½ÏòÎ»ÖÃ²»Ò»Ñù
+	* CheckBomb() å†…å‡»ä¸­éšœç¢ç‰©æ—¶è°ƒç”¨
+	* id  : å­å¼¹ id
+	* x,y : å­å¼¹å‡¸å‡ºç‚¹çš„åæ ‡, æ ¹æ®ä¸åŒæ–¹å‘ä½ç½®ä¸ä¸€æ ·
 	*/
 	void ClearWallOrStone(int id, int x, int y);
 
 	/*
-	* ±ê¼Ç 4 ¸ö 8*8 µÄ¸ñ×Ó
-	* x,y : 16*16 ¸ñ×ÓµÄÖĞĞÄµã×ø±ê
-	* val : ĞèÒª±ê¼ÇµÄÖµ
+	* æ ‡è®° 4 ä¸ª 8*8 çš„æ ¼å­
+	* x,y : 16*16 æ ¼å­çš„ä¸­å¿ƒç‚¹åæ ‡
+	* val : éœ€è¦æ ‡è®°çš„å€¼
 	*/
 	void SignBox_8(int x, int y, int val);
 
-	// ¸ù¾İÌ¹¿ËÖĞĞÄ×ø±ê, ±ê¼Ç16¸ö 4*4 ¸ñ×Ó
+	// æ ¹æ®å¦å…‹ä¸­å¿ƒåæ ‡, æ ‡è®°16ä¸ª 4*4 æ ¼å­
 	void SignBox_4(int, int, int);
 
 	/*
-	* ²ÎÊıÊÇ [26][26] µÄÏÂ±êË÷Òı
+	* å‚æ•°æ˜¯ [26][26] çš„ä¸‹æ ‡ç´¢å¼•
 	*/
 	static bool CheckBox_8(int iy, int jx);
 
-	/*×Óµ¯»÷ÖĞ×Óµ¯Ê±ºòµ÷ÓÃ*/
+	/*å­å¼¹å‡»ä¸­å­å¼¹æ—¶å€™è°ƒç”¨*/
 	//void DisappearBullet(int sign);
 
 	/**/
 	static void ProtectCamp(int val);
 
 public:
-	static list<PlayerBase*>* mPList;		// ÔÚGameControlÄÚ ¸³Öµ
+	static list<PlayerBase*>* mPList;		// åœ¨GameControlå†… èµ‹å€¼
 
 private:
-	bool mDied;								// ÉúÃüÊÇ·ñÓÃÍê,ËÀÍö
-	byte player_id : 1;						// [0-1] Íæ¼Ò
-	PlayerTank* mPlayerTank;				// Ì¹¿ËÀà
+	bool mDied;								// ç”Ÿå‘½æ˜¯å¦ç”¨å®Œ,æ­»äº¡
+	byte player_id : 1;						// [0-1] ç©å®¶
+	PlayerTank* mPlayerTank;				// å¦å…‹ç±»
 	static BoxMarkStruct* bms;
 
-	IMAGE m12PImage;						// 1P\2P Í¼±ê
-	int m12PImage_x, m12PImage_y;			// Í¼±ê×ø±ê
+	IMAGE m12PImage;						// 1P\2P å›¾æ ‡
+	int m12PImage_x, m12PImage_y;			// å›¾æ ‡åæ ‡
 
-	IMAGE mPlayerTankIcoImage;				// Íæ¼ÒÌ¹¿ËÍ¼±ê
-	int   mPlayerTankIcoImage_x,			// Í¼±ê×ø±ê
+	IMAGE mPlayerTankIcoImage;				// ç©å®¶å¦å…‹å›¾æ ‡
+	int   mPlayerTankIcoImage_x,			// å›¾æ ‡åæ ‡
 		  mPlayerTankIcoImage_y;
 
-	int mPlayerLife;						// Íæ¼ÒÉúÃü, Ä¬ÈÏ3
-	int mPlayerLife_x, 						// Í¼±ê×ø±ê
+	int mPlayerLife;						// ç©å®¶ç”Ÿå‘½, é»˜è®¤3
+	int mPlayerLife_x, 						// å›¾æ ‡åæ ‡
 		mPlayerLife_y;
 
-	IMAGE mBlackNumberImage;				// 0123456789 ºÚÉ«Êı×Ö
-	int mTankX, mTankY;					// Ì¹¿ËÖĞĞÄµã×ø±ê
-	byte mPlayerTankLevel : 2;				// [0-3] Ì¹¿Ë¼¶±ğ,»ñµÃµÀ¾ßºóÉı¼¶Ì¹¿Ë
-	byte mTankDir : 2;						// µ±Ç°Ì¹¿Ë·½Ïò0-×ó,1-ÉÏ,2ÓÒ,3-ÏÂ
-	static int mDevXY[4][2];				// ËÄ¸ö·½ÏòµÄÆ«ÒÆÁ¿
-	int mSpeed[4];							// mSpeed * mDevXY µÃµ½ÔË¶¯ËÙ¶È, ÏÂ±ê¶ÔÓ¦ mPlayerTankLevel, ²»Í¬¼¶±ğËÙ¶È²»Ò»Ñù
+	IMAGE mBlackNumberImage;				// 0123456789 é»‘è‰²æ•°å­—
+	int mTankX, mTankY;					// å¦å…‹ä¸­å¿ƒç‚¹åæ ‡
+	byte mPlayerTankLevel : 2;				// [0-3] å¦å…‹çº§åˆ«,è·å¾—é“å…·åå‡çº§å¦å…‹
+	byte mTankDir : 2;						// å½“å‰å¦å…‹æ–¹å‘0-å·¦,1-ä¸Š,2å³,3-ä¸‹
+	static int mDevXY[4][2];				// å››ä¸ªæ–¹å‘çš„åç§»é‡
+	int mSpeed[4];							// mSpeed * mDevXY å¾—åˆ°è¿åŠ¨é€Ÿåº¦, ä¸‹æ ‡å¯¹åº” mPlayerTankLevel, ä¸åŒçº§åˆ«é€Ÿåº¦ä¸ä¸€æ ·
 
-	BulletStruct mBulletStruct[2];			// Á½¿Å×Óµ¯
-	int mBullet_1_counter;					// ×Óµ¯ 1 µÄ¼ÆÊı, ×Óµ¯ 1 ·¢Éä¶à¾Ãºó²ÅÄÜ·¢Éä×Óµ¯ 2
-	bool mMoving;							// Ö¸Ê¾Ì¹¿ËÊÇ·ñÒÆ¶¯, ´«µİµ½ GetTankImage() »ñÈ¡ÒÆ¶¯µÄÌ¹¿Ë
+	BulletStruct mBulletStruct[2];			// ä¸¤é¢—å­å¼¹
+	int mBullet_1_counter;					// å­å¼¹ 1 çš„è®¡æ•°, å­å¼¹ 1 å‘å°„å¤šä¹…åæ‰èƒ½å‘å°„å­å¼¹ 2
+	bool mMoving;							// æŒ‡ç¤ºå¦å…‹æ˜¯å¦ç§»åŠ¨, ä¼ é€’åˆ° GetTankImage() è·å–ç§»åŠ¨çš„å¦å…‹
 
-	BombStruct mBombS[2];			// ±¬Õ¨½á¹¹Ìå
-	BlastStruct mBlast;				// Ì¹¿Ë±¬Õ¨½á¹¹, 
+	BombStruct mBombS[2];			// çˆ†ç‚¸ç»“æ„ä½“
+	BlastStruct mBlast;				// å¦å…‹çˆ†ç‚¸ç»“æ„, 
 
-	StarClass mStar;				// Ì¹¿Ë³öÏÖÇ°µÄËÄ½ÇĞÇÉÁË¸
-	RingClass mRing;				// ±£»¤È¦Àà
+	StarClass mStar;				// å¦å…‹å‡ºç°å‰çš„å››è§’æ˜Ÿé—ªçƒ
+	RingClass mRing;				// ä¿æŠ¤åœˆç±»
 
-	static PropClass mProp;		// µÀ¾ßÀà
+	static PropClass mProp;		// é“å…·ç±»
 
-	/*GameControl ÄÚÑ­»·¼ì²â¸ÃÖµ, È»ºóÔÚÉèÖÃ EnemyBase Í£Ö¹ÒÆ¶¯*/
-	static bool mTimeProp;			// ¼ÇÂ¼ÊÇ·ñ»ñµÃ Ê±ÖÓµÀ¾ß
-	bool mBombProp;					// µØÀ×µÀ¾ß, Âß¼­Óë mTimeProp ÏàÍ¬
-	static bool mShovelProp;				// Íæ¼ÒÊÇ·ñÓµÓĞ²ù×ÓµÀ¾ß
+	/*GameControl å†…å¾ªç¯æ£€æµ‹è¯¥å€¼, ç„¶ååœ¨è®¾ç½® EnemyBase åœæ­¢ç§»åŠ¨*/
+	static bool mTimeProp;			// è®°å½•æ˜¯å¦è·å¾— æ—¶é’Ÿé“å…·
+	bool mBombProp;					// åœ°é›·é“å…·, é€»è¾‘ä¸ mTimeProp ç›¸åŒ
+	static bool mShovelProp;				// ç©å®¶æ˜¯å¦æ‹¥æœ‰é“²å­é“å…·
 	static int mShovelProp_counter;	// 
 
-	TimeClock mTankTimer;			// Ì¹¿ËÒÆ¶¯¼ÆÊ±Æ÷
-	TimeClock mBulletTimer;			// ×Óµ¯ÒÆ¶¯ËÙ¶È
-	TimeClock mBombTimer;	//bug?		// ×Óµ¯±¬Õ¨ËÙ¶È
-	//TimeClock mBlastTimer;			// Ì¹¿Ë±¬Õ¨ËÙ¶È
+	TimeClock mTankTimer;			// å¦å…‹ç§»åŠ¨è®¡æ—¶å™¨
+	TimeClock mBulletTimer;			// å­å¼¹ç§»åŠ¨é€Ÿåº¦
+	TimeClock mBombTimer;	//bug?		// å­å¼¹çˆ†ç‚¸é€Ÿåº¦
+	//TimeClock mBlastTimer;			// å¦å…‹çˆ†ç‚¸é€Ÿåº¦
 
-	ScorePanel* mScorePanel;		// ¹Ø¿¨½áÊøºóÏÔÊ¾·ÖÊı½á¹û
+	ScorePanel* mScorePanel;		// å…³å¡ç»“æŸåæ˜¾ç¤ºåˆ†æ•°ç»“æœ
 
-	int mKillEnemyNumber[4];		// ËÄÖÖµĞ»úÀàĞÍ,É±µĞÊıÁ¿
+	int mKillEnemyNumber[4];		// å››ç§æ•Œæœºç±»å‹,æ€æ•Œæ•°é‡
 
-	bool mPause;			// ±»ÁíÍâÒ»¸öÍæ¼Ò»÷ÖĞ, ÔİÍ£Ò»¶ÎÊ±¼ä
-	int mPauseCounter;		// Move() ÄÚ¼ÆÊıÍ£Ö¹ÒÆ¶¯, DrawTank() ÄÚÈ¡Ä£¼ÆÊı,ÊµÏÖÌ¹¿ËÉÁË¸
+	bool mPause;			// è¢«å¦å¤–ä¸€ä¸ªç©å®¶å‡»ä¸­, æš‚åœä¸€æ®µæ—¶é—´
+	int mPauseCounter;		// Move() å†…è®¡æ•°åœæ­¢ç§»åŠ¨, DrawTank() å†…å–æ¨¡è®¡æ•°,å®ç°å¦å…‹é—ªçƒ
 
-	bool mHasSendKillNumToScorePanel;		// ·ÀÖ¹ Ê¤Àûºó¼¯ÖĞ´ó±¾Óª»òÆäËü.¶à´Î·¢ËÍÊı¾İµ½·ÖÊıÃæ°å
+	bool mHasSendKillNumToScorePanel;		// é˜²æ­¢ èƒœåˆ©åé›†ä¸­å¤§æœ¬è¥æˆ–å…¶å®ƒ.å¤šæ¬¡å‘é€æ•°æ®åˆ°åˆ†æ•°é¢æ¿
 
 	/*
-	* CheckMoveable() ÄÚ¼ì²â
-	* Ì¹¿ËÊÇ·ñÔÚ _ICE ÉÏ
-	* ½øÈë _ICE µÄÊ±ºòÔòÉèÖÃÎª true, ¸ù¾İ¸Ã flag ÉèÖÃ mTankTimer Ê±¼ä²î, ¼Ó¿ìÌ¹¿ËÒÆ¶¯
-	* ³öÀ´ÔòÉèÖÃ false, µ÷»ØÔ­À´Ê±¼ä²î
+	* CheckMoveable() å†…æ£€æµ‹
+	* å¦å…‹æ˜¯å¦åœ¨ _ICE ä¸Š
+	* è¿›å…¥ _ICE çš„æ—¶å€™åˆ™è®¾ç½®ä¸º true, æ ¹æ®è¯¥ flag è®¾ç½® mTankTimer æ—¶é—´å·®, åŠ å¿«å¦å…‹ç§»åŠ¨
+	* å‡ºæ¥åˆ™è®¾ç½® false, è°ƒå›åŸæ¥æ—¶é—´å·®
 	*/
 	bool mOnIce;
 	bool mAutoMove;
 	int mAutoMove_Counter;
-	int mRandCounter;			// Ã¿´Î×Ô¶¯ÒÆ¶¯´ÎÊıËæ»ú
+	int mRandCounter;			// æ¯æ¬¡è‡ªåŠ¨ç§»åŠ¨æ¬¡æ•°éšæœº
 
-	PlayerGameover mPlayerGameover;		// Íæ¼Ò±»ÏûÃğÏûÊ§ gameover ×ÖÑù
+	PlayerGameover mPlayerGameover;		// ç©å®¶è¢«æ¶ˆç­æ¶ˆå¤± gameover å­—æ ·
 
 	/*TimeClock mGameOverTimer;		//
-	int mGameOver_Dev;			// X ÖáÒÆ¶¯, Íæ¼ÒÒ»ÊÇÕıÊı·ÖÁ¿, Íæ¼Ò¶şÊÇ¸ºÊı·ÖÁ¿
+	int mGameOver_Dev;			// X è½´ç§»åŠ¨, ç©å®¶ä¸€æ˜¯æ­£æ•°åˆ†é‡, ç©å®¶äºŒæ˜¯è´Ÿæ•°åˆ†é‡
 	int mGameOverX, mGameOverY;	
-	int mGameOver_end_x;			// Í¼Æ¬Í£Ö¹µÄ x ×ø±ê
-	static IMAGE mGameOverImage;		// Íæ¼ÒÉúÃüÖµÓÃÍê, ÏÔÊ¾Ò»¸öË®Æ½ÒÆ¶¯µÄ GAMEOVER ×ÖÑù
-	int mGameOverCounter;			// Í¼Æ¬Í£Ö¹ºó¶à¾ÃÏûÊ§
+	int mGameOver_end_x;			// å›¾ç‰‡åœæ­¢çš„ x åæ ‡
+	static IMAGE mGameOverImage;		// ç©å®¶ç”Ÿå‘½å€¼ç”¨å®Œ, æ˜¾ç¤ºä¸€ä¸ªæ°´å¹³ç§»åŠ¨çš„ GAMEOVER å­—æ ·
+	int mGameOverCounter;			// å›¾ç‰‡åœæ­¢åå¤šä¹…æ¶ˆå¤±
 	bool mShowGameOver;*/
 
-	static int mMoveSpeedDev[4];	// ËÄ¸ö¼¶±ğÌ¹¿ËÒÆ¶¯Ê±¼ä¼ä¸ô
-	static int mBulletSpeedDev[4];	// ²»Í¬¼¶±ğ×Óµ¯Ê±¼ä¼ä¸ôËÙ¶È
+	static int mMoveSpeedDev[4];	// å››ä¸ªçº§åˆ«å¦å…‹ç§»åŠ¨æ—¶é—´é—´éš”
+	static int mBulletSpeedDev[4];	// ä¸åŒçº§åˆ«å­å¼¹æ—¶é—´é—´éš”é€Ÿåº¦
 };

@@ -3,10 +3,10 @@
 #include "struct.h"
 #include "TimeClock.h"
 
-/************** µĞ»úÌ¹¿Ë ************
-* Ò»¸öµĞ»úÊµÀı»¯Ò»¸ö¶ÔÏó
-* Ìá¹©µĞ»úÀà±ğ(ÊÇ·ñÊÇµÀ¾ßÌ¹¿Ë), µĞ»ú¼¶±ğ[0-3]
-* GameControl ÄÚµĞ»ú±»ÏûÃğ, ²»»á½«Æä´Ó EnemyList ÄÚÒÆ³ı, ÒòÎªµĞ»ú×Óµ¯¿ÉÄÜ»¹»áÔÚÔË¶¯.ÓÎÏ·½áÊø·ÖÊıÃæ°åÏÔÊ¾ÍêºóÊÍ·ÅµĞ»úÁ´±í×ÊÔ´
+/************** æ•Œæœºå¦å…‹ ************
+* ä¸€ä¸ªæ•Œæœºå®ä¾‹åŒ–ä¸€ä¸ªå¯¹è±¡
+* æä¾›æ•Œæœºç±»åˆ«(æ˜¯å¦æ˜¯é“å…·å¦å…‹), æ•Œæœºçº§åˆ«[0-3]
+* GameControl å†…æ•Œæœºè¢«æ¶ˆç­, ä¸ä¼šå°†å…¶ä» EnemyList å†…ç§»é™¤, å› ä¸ºæ•Œæœºå­å¼¹å¯èƒ½è¿˜ä¼šåœ¨è¿åŠ¨.æ¸¸æˆç»“æŸåˆ†æ•°é¢æ¿æ˜¾ç¤ºå®Œåé‡Šæ”¾æ•Œæœºé“¾è¡¨èµ„æº
 ************************************/
 class EnemyBase
 {
@@ -15,110 +15,110 @@ public:
 	virtual ~EnemyBase();
 	void Init();
 
-	Star_State ShowStar(const HDC& center_hdc, int& total );		// ÏÔÊ¾ÉÁË¸ËÄ½ÇĞÇ, true-ÕıÔÚÏÔÊ¾, false-ÏÔÊ¾Íê±Ï
-	void TankMoving(const HDC& center_hdc);		// µĞ»úÒÆ¶¯
-	virtual void DrawTank(const HDC&) {}			// ´¿»æÖÆÌ¹¿Ë, ×ÓÀà¸²»æÖÆ
-	void DrawBullet(const HDC&);			// »æÖÆ×Óµ¯, ĞèÒªÓë×Óµ¯ÒÆ¶¯·Ö¿ª,
-	bool ShootBullet();			// ·¢Éä×Óµ¯
-	BulletShootKind BulletMoving( );			// ×Óµ¯ÒÆ¶¯
+	Star_State ShowStar(const HDC& center_hdc, int& total );		// æ˜¾ç¤ºé—ªçƒå››è§’æ˜Ÿ, true-æ­£åœ¨æ˜¾ç¤º, false-æ˜¾ç¤ºå®Œæ¯•
+	void TankMoving(const HDC& center_hdc);		// æ•Œæœºç§»åŠ¨
+	virtual void DrawTank(const HDC&) {}			// çº¯ç»˜åˆ¶å¦å…‹, å­ç±»è¦†ç»˜åˆ¶
+	void DrawBullet(const HDC&);			// ç»˜åˆ¶å­å¼¹, éœ€è¦ä¸å­å¼¹ç§»åŠ¨åˆ†å¼€,
+	bool ShootBullet();			// å‘å°„å­å¼¹
+	BulletShootKind BulletMoving( );			// å­å¼¹ç§»åŠ¨
 	void Bombing(const HDC&);
-	virtual bool BeKill(bool killanyway);			// µĞ»ú±»ÏûÃğ, Çå³ı SignBox ±ê¼Ç, ²ÎÊı±íÊ¾Íæ¼Ò»ñµÃµØÀ×Ö±½ÓkillµôBigestTank
-	bool Blasting(const HDC& );		// ÏÔÊ¾Ì¹¿Ë±¬Õ¨Í¼, true ±êÊ¶±¬Õ¨Íê,GameControl »ñÈ¡·µ»ØÖµÈ»ºó½«¸ÃµĞ»úÉ¾³ı
+	virtual bool BeKill(bool killanyway);			// æ•Œæœºè¢«æ¶ˆç­, æ¸…é™¤ SignBox æ ‡è®°, å‚æ•°è¡¨ç¤ºç©å®¶è·å¾—åœ°é›·ç›´æ¥killæ‰BigestTank
+	bool Blasting(const HDC& );		// æ˜¾ç¤ºå¦å…‹çˆ†ç‚¸å›¾, true æ ‡è¯†çˆ†ç‚¸å®Œ,GameControl è·å–è¿”å›å€¼ç„¶åå°†è¯¥æ•Œæœºåˆ é™¤
 
-	/*ÓÉ GameControl ÄÚÉèÖÃ, ÉèÖÃ mPause, È»ºó ShootBullet() ¼ì²âÍ£Ö¹·¢Éä×Óµ¯*/
+	/*ç”± GameControl å†…è®¾ç½®, è®¾ç½® mPause, ç„¶å ShootBullet() æ£€æµ‹åœæ­¢å‘å°„å­å¼¹*/
 	static void SetPause(bool);
 
-	int GetId();				// ·µ»ØµĞ»ú id
-	TANK_KIND GetKind();		// ·µ»ØµĞ»úÀàĞÍ, ÊÇ·ñÊÇµÀ¾ßÌ¹¿Ë
+	int GetId();				// è¿”å›æ•Œæœº id
+	TANK_KIND GetKind();		// è¿”å›æ•Œæœºç±»å‹, æ˜¯å¦æ˜¯é“å…·å¦å…‹
 	byte GetLevel();
 
 private:
 	void SignBox_8(int, int, int value);
-	void SignBox_4(int x, int y, int value);		// ±ê¼Ç»òÈ¡Ïû 4*4 ´óĞ¡µÄ¸ñ×ÓÎªÌ¹¿Ë;
+	void SignBox_4(int x, int y, int value);		// æ ‡è®°æˆ–å–æ¶ˆ 4*4 å¤§å°çš„æ ¼å­ä¸ºå¦å…‹;
 
 	/*
-	* ±ê¼Ç×Óµ¯Í·ËùÔÚµÄÒ»¸ö 4 * 4 ¸ñ×Ó
-	* ²ÎÊıÊÇ×Óµ¯Í¼Æ¬×óÉÏ½Ç×ø±ê
+	* æ ‡è®°å­å¼¹å¤´æ‰€åœ¨çš„ä¸€ä¸ª 4 * 4 æ ¼å­
+	* å‚æ•°æ˜¯å­å¼¹å›¾ç‰‡å·¦ä¸Šè§’åæ ‡
 	*/
 	void SignBullet(int, int, byte dir, int val);
 
-	bool CheckBox_8();	// ¼ì²âÄ³¸ö box_8 ÊÇ·ñ¿ÉÒÔ·ÅÖÃÌ¹¿Ë, ²ÎÊıÊÇ 16*16 ¸ñ×ÓµÄÖĞĞÄµã, ÓëÌ¹¿Ë×ø±ê¹æÔòÏàÍ¬
+	bool CheckBox_8();	// æ£€æµ‹æŸä¸ª box_8 æ˜¯å¦å¯ä»¥æ”¾ç½®å¦å…‹, å‚æ•°æ˜¯ 16*16 æ ¼å­çš„ä¸­å¿ƒç‚¹, ä¸å¦å…‹åæ ‡è§„åˆ™ç›¸åŒ
 	bool CheckMoveable();			// 
-	void RejustDirPosition();		// ÖØĞÂ¶¨Î»Ì¹¿Ë·½Ïò, µ÷ÕıÌ¹¿ËÎ»ÖÃ, ±£³ÖÔÚ¸ñ×ÓÉÏ
-	BulletShootKind CheckBomb();				// ÒÆ¶¯×Óµ¯
-	void ShootWhat(int, int);		// ¼ì²âÉäÖĞºÎÎï
+	void RejustDirPosition();		// é‡æ–°å®šä½å¦å…‹æ–¹å‘, è°ƒæ­£å¦å…‹ä½ç½®, ä¿æŒåœ¨æ ¼å­ä¸Š
+	BulletShootKind CheckBomb();				// ç§»åŠ¨å­å¼¹
+	void ShootWhat(int, int);		// æ£€æµ‹å°„ä¸­ä½•ç‰©
 
-	/*ÔÚTankMoving()ÄÚµ÷ÓÃ*/
-	void ShootBack();		// »ØÍ·Éä»÷
+	/*åœ¨TankMoving()å†…è°ƒç”¨*/
+	void ShootBack();		// å›å¤´å°„å‡»
 
 protected:
-	int mEnemyId;				// Çø±ğµĞ»úÓëµĞ»ú
-	TANK_KIND mEnemyTankKind;		// µĞ»úÀà±ğ, µÀ¾ßÌ¹¿ËºÍÆÕÍ¨Ì¹¿ËÁ½ÖÖ, [0-1]
-	byte mEnemyTankLevel : 2;	// µĞ»úÌ¹¿Ë4¸ö¼¶±ğ [0-3]
-	bool mDied;					// ÊÇ·ñ±»±»ÏûÃğ, ±»»÷ÖĞºóÉèÖÃÎª true, µĞ»ú¼ì²â¸ÄÖµ²»ÄÜÒÆ¶¯
-	BoxMarkStruct* bms;			// Ö¸Ïò¸ñ×Ó±ê¼Ç½á¹¹, ÓÉ GameControl ´«µİ½øÀ´
+	int mEnemyId;				// åŒºåˆ«æ•Œæœºä¸æ•Œæœº
+	TANK_KIND mEnemyTankKind;		// æ•Œæœºç±»åˆ«, é“å…·å¦å…‹å’Œæ™®é€šå¦å…‹ä¸¤ç§, [0-1]
+	byte mEnemyTankLevel : 2;	// æ•Œæœºå¦å…‹4ä¸ªçº§åˆ« [0-3]
+	bool mDied;					// æ˜¯å¦è¢«è¢«æ¶ˆç­, è¢«å‡»ä¸­åè®¾ç½®ä¸º true, æ•Œæœºæ£€æµ‹æ”¹å€¼ä¸èƒ½ç§»åŠ¨
+	BoxMarkStruct* bms;			// æŒ‡å‘æ ¼å­æ ‡è®°ç»“æ„, ç”± GameControl ä¼ é€’è¿›æ¥
 
-	int mTankX, mTankY;			// Ì¹¿Ë×ø±ê, Ì¹¿ËµÄÖĞĞÄµã
-	byte mTankDir : 2;			// Ì¹¿Ë·½Ïò
-	byte mTankImageIndex : 6;	// Ì¹¿ËÒÆ¶¯ÇĞ»»Í¼Æ¬
-	int mStep;					// µ±Ç°·½ÏòÒÆ¶¯µÄ²½Êı, Ò»¶¨²½Êıºó»òÕßÓöµ½ÕÏ°­Îï±ä»»·½Ïò²¢ÖØĞÂ¼ÆËã;
-	static int mDevXY[4][2];	// ËÄ¸ö·½ÏòµÄÆ«ÒÆÁ¿
-	int mSpeed[4];					// mSpeed * mDevXY µÃµ½ÔË¶¯ËÙ¶È, ÏÂ±ê¶ÔÓ¦ mPlayerTankLevel, ²»Í¬¼¶±ğËÙ¶È²»Ò»Ñù
+	int mTankX, mTankY;			// å¦å…‹åæ ‡, å¦å…‹çš„ä¸­å¿ƒç‚¹
+	byte mTankDir : 2;			// å¦å…‹æ–¹å‘
+	byte mTankImageIndex : 6;	// å¦å…‹ç§»åŠ¨åˆ‡æ¢å›¾ç‰‡
+	int mStep;					// å½“å‰æ–¹å‘ç§»åŠ¨çš„æ­¥æ•°, ä¸€å®šæ­¥æ•°åæˆ–è€…é‡åˆ°éšœç¢ç‰©å˜æ¢æ–¹å‘å¹¶é‡æ–°è®¡ç®—;
+	static int mDevXY[4][2];	// å››ä¸ªæ–¹å‘çš„åç§»é‡
+	int mSpeed[4];					// mSpeed * mDevXY å¾—åˆ°è¿åŠ¨é€Ÿåº¦, ä¸‹æ ‡å¯¹åº” mPlayerTankLevel, ä¸åŒçº§åˆ«é€Ÿåº¦ä¸ä¸€æ ·
 
-	static bool mPause;				// ÓÉ GameControl ¿ØÖÆ, È»ºóÔÚ·¢ÉäµÄÊ±ºò¼ì²âÕâ¸öÖµ, Èç¹ûµĞ»ú±»ÔİÍ£ÔòÍ£Ö¹·¢Éä×Óµ¯
-	//bool mTankNumberReduce;		// µ±ËÄ½ÇĞÇ¿ªÊ¼, true-Ì¹¿Ë×ÜÊı¼õÒ»,È»ºóÉè¸ÃÖµ=false, Ö»¼õÒ»´Î
+	static bool mPause;				// ç”± GameControl æ§åˆ¶, ç„¶ååœ¨å‘å°„çš„æ—¶å€™æ£€æµ‹è¿™ä¸ªå€¼, å¦‚æœæ•Œæœºè¢«æš‚åœåˆ™åœæ­¢å‘å°„å­å¼¹
+	//bool mTankNumberReduce;		// å½“å››è§’æ˜Ÿå¼€å§‹, true-å¦å…‹æ€»æ•°å‡ä¸€,ç„¶åè®¾è¯¥å€¼=false, åªå‡ä¸€æ¬¡
 
 	BulletStruct mBulletStruct;
-	int mShootCounter;		// ÉèÖÃÒ»¸öËæ»úÊı, Ëæ»ú¼ÆÊı²îºó·¢Éä×Óµ¯
+	int mShootCounter;		// è®¾ç½®ä¸€ä¸ªéšæœºæ•°, éšæœºè®¡æ•°å·®åå‘å°„å­å¼¹
 
-	BombStruct mBombS;			// ±¬Õ¨½á¹¹Ìå
-	BlastStruct mBlast;			// Ì¹¿Ë±¬Õ¨½á¹¹
-	StarClass mStar;			// ËÄ½ÇĞÇÉÁË¸Àà
+	BombStruct mBombS;			// çˆ†ç‚¸ç»“æ„ä½“
+	BlastStruct mBlast;			// å¦å…‹çˆ†ç‚¸ç»“æ„
+	StarClass mStar;			// å››è§’æ˜Ÿé—ªçƒç±»
 
-	TimeClock mTankTimer;		// µĞ»úÒÆ¶¯ËÙ¶È
-	TimeClock mBulletTimer;		// ×Óµ¯ÒÆ¶¯ËÙ¶È
-	TimeClock mShootTimer;		// ·¢Éä×Óµ¯ÆµÂÊ
-	TimeClock mBombTimer;		// ×Óµ¯±¬Õ¨ËÙ¶È
-	//TimeClock mBlastTimer;		// Ì¹¿Ë±¬Õ¨ËÙ¶È
+	TimeClock mTankTimer;		// æ•Œæœºç§»åŠ¨é€Ÿåº¦
+	TimeClock mBulletTimer;		// å­å¼¹ç§»åŠ¨é€Ÿåº¦
+	TimeClock mShootTimer;		// å‘å°„å­å¼¹é¢‘ç‡
+	TimeClock mBombTimer;		// å­å¼¹çˆ†ç‚¸é€Ÿåº¦
+	//TimeClock mBlastTimer;		// å¦å…‹çˆ†ç‚¸é€Ÿåº¦
 
-	TimeClock mShootBackTimer;	// Ì¹¿Ë»ØÍ·Éä»÷,È»ºó¶Ì¾àÀëÔÙ´Î±äÏò
+	TimeClock mShootBackTimer;	// å¦å…‹å›å¤´å°„å‡»,ç„¶åçŸ­è·ç¦»å†æ¬¡å˜å‘
 
-	IMAGE mScoreImage[4];			// 100\200.. ·Ö, µĞ»ú±¬Õ¨ÍêºóÏÔÊ¾µÄ
+	IMAGE mScoreImage[4];			// 100\200.. åˆ†, æ•Œæœºçˆ†ç‚¸å®Œåæ˜¾ç¤ºçš„
 };
 
-// Ç°ÈıÖÖÆÕÍ¨Ì¹¿Ë
+// å‰ä¸‰ç§æ™®é€šå¦å…‹
 class CommonTank : public EnemyBase
 {
 public:
 	CommonTank(byte level, BoxMarkStruct* bm);
 	~CommonTank();
-	void DrawTank(const HDC&);				// ´¿»æÖÆÌ¹¿Ë
+	void DrawTank(const HDC&);				// çº¯ç»˜åˆ¶å¦å…‹
 
-	TankInfo* mTank;			// »ÒÉ«Ì¹¿Ë
+	TankInfo* mTank;			// ç°è‰²å¦å…‹
 };
 
-// Ç°ÈıÖÖµÀ¾ßÌ¹¿Ë
+// å‰ä¸‰ç§é“å…·å¦å…‹
 class PropTank : public EnemyBase
 {
 public:
 	PropTank(byte level, BoxMarkStruct* bm);
 	~PropTank();
-	void DrawTank(const HDC&);		// ´¿»æÖÆÌ¹¿Ë
+	void DrawTank(const HDC&);		// çº¯ç»˜åˆ¶å¦å…‹
 
-	TankInfo* mTank[2];				// ´æ´¢»ÒÉ«ºÍºìÉ«µÄÌ¹¿Ë
-	byte index_counter : 6;		// ÏÂ±êË÷Òı±äÉ«
+	TankInfo* mTank[2];				// å­˜å‚¨ç°è‰²å’Œçº¢è‰²çš„å¦å…‹
+	byte index_counter : 6;		// ä¸‹æ ‡ç´¢å¼•å˜è‰²
 };
 
-// µÚËÄÖÖ×î´óÌ¹¿Ë (µÀ¾ßÊÇºì»Æ»Ò, ÆÕÍ¨ÊÇÂÌ»Æ»Ò)
+// ç¬¬å››ç§æœ€å¤§å¦å…‹ (é“å…·æ˜¯çº¢é»„ç°, æ™®é€šæ˜¯ç»¿é»„ç°)
 class BigestTank : public EnemyBase
 {
 public:
 	BigestTank(TANK_KIND kind, BoxMarkStruct* bm);
 	~BigestTank();
-	void DrawTank(const HDC&);	// ´¿»æÖÆÌ¹¿Ë
+	void DrawTank(const HDC&);	// çº¯ç»˜åˆ¶å¦å…‹
 	bool BeKill(bool killanyway);
 
-	TankInfo* mTank[4];			// »Ò,ºì»Æ,ÂÌ
-	byte index_counter : 6;		// ÏÂ±êË÷Òı±äÉ«
-	int hp;				// ÕâÖÖÌ¹¿ËĞèÒª»÷ÖĞËÄ´Î²Å»á±¬Õ¨
+	TankInfo* mTank[4];			// ç°,çº¢é»„,ç»¿
+	byte index_counter : 6;		// ä¸‹æ ‡ç´¢å¼•å˜è‰²
+	int hp;				// è¿™ç§å¦å…‹éœ€è¦å‡»ä¸­å››æ¬¡æ‰ä¼šçˆ†ç‚¸
 };

@@ -8,18 +8,18 @@ struct Map
 	char buf[26][27];
 };
 
-/* Àà¹¦ÄÜ:
-* ´Ó main ½ÓÊÕÖ÷´°¿Ú»æÍ¼½Ó¿Ú
-* ¶¨ÒåÒ»¸ö IMAGE »­²¼, »æÖÆµØÍ¼/µĞ»úÁĞ±íĞÅÏ¢/Æì×Ó/¹Ø¿¨
-* ´æ´¢¸ñ×Ó±ê¼Ç
-* ´æ´¢Íæ¼ÒÁ´±í
-* ½øĞĞÓÎÏ·Ñ­»·
+/* ç±»åŠŸèƒ½:
+* ä» main æ¥æ”¶ä¸»çª—å£ç»˜å›¾æ¥å£
+* å®šä¹‰ä¸€ä¸ª IMAGE ç”»å¸ƒ, ç»˜åˆ¶åœ°å›¾/æ•Œæœºåˆ—è¡¨ä¿¡æ¯/æ——å­/å…³å¡
+* å­˜å‚¨æ ¼å­æ ‡è®°
+* å­˜å‚¨ç©å®¶é“¾è¡¨
+* è¿›è¡Œæ¸¸æˆå¾ªç¯
 
-** ³ÉÔ±Êı¾İ:
-- EnemyList: ´æ´¢±»ÏûÃğµÄ and ÕıÔÚÒÆ¶¯ and µÈ´ı³öÏÖµÄµĞ»ú
+** æˆå‘˜æ•°æ®:
+- EnemyList: å­˜å‚¨è¢«æ¶ˆç­çš„ and æ­£åœ¨ç§»åŠ¨ and ç­‰å¾…å‡ºç°çš„æ•Œæœº
 */
 
-enum GameResult {Victory, Fail};		// Ã¿Ò»¹ØÊ¤Àû\Ê§°Ü
+enum GameResult {Victory, Fail};		// æ¯ä¸€å…³èƒœåˆ©\å¤±è´¥
 
 class GameControl
 {
@@ -27,90 +27,90 @@ public:
 	GameControl( HDC des_hdc, HDC image_hdc/*, BoxMarkStruct* */);
 	~GameControl();
 	void Init();
-	void AddPlayer(int player_num);					// ¼ÓÔØÍæ¼Ò½ø¸ÃÀà¿ØÖÆ
-	void LoadMap();									// ¶ÁÈ¡ .map µØÍ¼ÎÄ¼ş|½âÎö»æÖÆµØÍ¼
-	bool CreateMap(bool* out);				// Íæ¼Ò×Ô¶¨ÒåµØÍ¼
+	void AddPlayer(int player_num);					// åŠ è½½ç©å®¶è¿›è¯¥ç±»æ§åˆ¶
+	void LoadMap();									// è¯»å– .map åœ°å›¾æ–‡ä»¶|è§£æç»˜åˆ¶åœ°å›¾
+	bool CreateMap(bool* out);				// ç©å®¶è‡ªå®šä¹‰åœ°å›¾
 	void GameLoop();
-	GameResult StartGame();								// ¸üĞÂ»æÖÆÓÎÏ·¸÷ÖÖ¶«Î÷, ·µ»Ø false ½áÊøÓÎÏ·
+	GameResult StartGame();								// æ›´æ–°ç»˜åˆ¶æ¸¸æˆå„ç§ä¸œè¥¿, è¿”å› false ç»“æŸæ¸¸æˆ
 
 private:
-	void CutStage();		// ¶¯»­
-	void ShowStage();				// ¿ªÊ¼Ã¿Ò»¹ØÖ®Ç°ÏÔÊ¾ STAGE 2 Ö®ÀàµÄ×ÖÑù
+	void CutStage();		// åŠ¨ç”»
+	void ShowStage();				// å¼€å§‹æ¯ä¸€å…³ä¹‹å‰æ˜¾ç¤º STAGE 2 ä¹‹ç±»çš„å­—æ ·
 	void ClearSignBox();
-	void InitSignBox();				// ³õÊ¼»¯¸ñ×Ó±ê¼Ç
-	void AddEnemy();						// ÓÎÏ·¿ªÊ¼Ç° Ìí¼Ó20 ¼ÜµĞ»ú
-	void SignBox_4(int i, int j, int sign_val);	// ±ê¼Ç¸ñ×Ó, LoadMap() ÄÚµ÷ÓÃ
+	void InitSignBox();				// åˆå§‹åŒ–æ ¼å­æ ‡è®°
+	void AddEnemy();						// æ¸¸æˆå¼€å§‹å‰ æ·»åŠ 20 æ¶æ•Œæœº
+	void SignBox_4(int i, int j, int sign_val);	// æ ‡è®°æ ¼å­, LoadMap() å†…è°ƒç”¨
 	bool RefreshData();
-	void RefreshRightPanel();						// Ë¢ĞÂÓÒ±ßĞÅÏ¢Ãæ°åÊı¾İ, ¸ù¾İÊı¾İ±ä»¯²Åµ÷ÓÃ¸üĞÂ
-	void RefreshCenterPanel();						// Ë¢ĞÂÖĞ¼äÓÎÏ·ÇøÓò 208 * 208
-	void CheckKillEnemy(PlayerBase*);		// ¼ì²âÍæ¼ÒÊÇ·ñ»÷ÖĞµĞ»ú, »÷ÖĞÔòÉ¾³ı¸ÃµĞ»ú
-	void IsGameOver();				// Ñ­»·¼ì²âÊÇ·ñflag,  gameover
-	void IsWinOver();				// ÏûÃğËùÓĞµĞ»úÊ¤Àû¹ı¹Ø
+	void RefreshRightPanel();						// åˆ·æ–°å³è¾¹ä¿¡æ¯é¢æ¿æ•°æ®, æ ¹æ®æ•°æ®å˜åŒ–æ‰è°ƒç”¨æ›´æ–°
+	void RefreshCenterPanel();						// åˆ·æ–°ä¸­é—´æ¸¸æˆåŒºåŸŸ 208 * 208
+	void CheckKillEnemy(PlayerBase*);		// æ£€æµ‹ç©å®¶æ˜¯å¦å‡»ä¸­æ•Œæœº, å‡»ä¸­åˆ™åˆ é™¤è¯¥æ•Œæœº
+	void IsGameOver();				// å¾ªç¯æ£€æµ‹æ˜¯å¦flag,  gameover
+	void IsWinOver();				// æ¶ˆç­æ‰€æœ‰æ•Œæœºèƒœåˆ©è¿‡å…³
 
 public:
-	static int mCurrentStage;						// [1-35] µ±Ç°¹Ø¿¨, SelectPanel ÄÚÊ¹ÓÃ, ±¾ÀàÄÚÊ¹ÓÃ
+	static int mCurrentStage;						// [1-35] å½“å‰å…³å¡, SelectPanel å†…ä½¿ç”¨, æœ¬ç±»å†…ä½¿ç”¨
 
 private:
-	// ´°¿Ú»æÍ¼½Ó¿Ú
-	IMAGE mCenterImage;				// ÓÃÓÚ±£³Ö mCenter_hdc ´æÔÚÓĞĞ§ĞÔ.
-	HDC mDes_hdc,					// Ö÷´°¿Úhdc, main ´«Èë
-		mImage_hdc,					// 256*224 µÄ hdc, main ´«Èë
-		mCenter_hdc;				// 208*208 µÄ hdc, ±¾Àà²úÉú, ÊÇÓÎÏ·ÇøÓò,·Ö¿ª,¾­³£¸üĞÂ,×ø±êÒ²ÈİÒ×Éè¶¨
+	// çª—å£ç»˜å›¾æ¥å£
+	IMAGE mCenterImage;				// ç”¨äºä¿æŒ mCenter_hdc å­˜åœ¨æœ‰æ•ˆæ€§.
+	HDC mDes_hdc,					// ä¸»çª—å£hdc, main ä¼ å…¥
+		mImage_hdc,					// 256*224 çš„ hdc, main ä¼ å…¥
+		mCenter_hdc;				// 208*208 çš„ hdc, æœ¬ç±»äº§ç”Ÿ, æ˜¯æ¸¸æˆåŒºåŸŸ,åˆ†å¼€,ç»å¸¸æ›´æ–°,åæ ‡ä¹Ÿå®¹æ˜“è®¾å®š
 
-	BoxMarkStruct* mBoxMarkStruct;			// ´æ´¢¸ñ×Ó±ê¼Ç
+	BoxMarkStruct* mBoxMarkStruct;			// å­˜å‚¨æ ¼å­æ ‡è®°
 	list<PlayerBase*> PlayerList;
-	list<EnemyBase*> EnemyList;				// µĞ»úÁĞ±í
+	list<EnemyBase*> EnemyList;				// æ•Œæœºåˆ—è¡¨
 
-	IMAGE mGrayBackgroundImage;		// ÓÎÏ·»ÒÉ«±³¾°Í¼
-	IMAGE mBlackBackgroundImage;	// ºÚÉ«±³¾°Í¼
+	IMAGE mGrayBackgroundImage;		// æ¸¸æˆç°è‰²èƒŒæ™¯å›¾
+	IMAGE mBlackBackgroundImage;	// é»‘è‰²èƒŒæ™¯å›¾
 
-	Map mMap;						// ´æ´¢µØÍ¼Êı¾İ½á¹¹
-	IMAGE mStoneImage;				// Ê¯Í·
-	IMAGE mForestImage;				// Ê÷ÁÖ
-	IMAGE mIceImage;				// ±ù¿é
-	IMAGE mRiverImage[2];			// ºÓÁ÷
-	IMAGE mWallImage;				// ÄàÇ½
-	IMAGE mCamp[2];					// ´ó±¾Óª
+	Map mMap;						// å­˜å‚¨åœ°å›¾æ•°æ®ç»“æ„
+	IMAGE mStoneImage;				// çŸ³å¤´
+	IMAGE mForestImage;				// æ ‘æ—
+	IMAGE mIceImage;				// å†°å—
+	IMAGE mRiverImage[2];			// æ²³æµ
+	IMAGE mWallImage;				// æ³¥å¢™
+	IMAGE mCamp[2];					// å¤§æœ¬è¥
 
-	IMAGE mEnemyTankIcoImage;		// µĞ»úÌ¹¿ËÍ¼±ê
-	IMAGE mFlagImage;				// Æì×Ó
+	IMAGE mEnemyTankIcoImage;		// æ•Œæœºå¦å…‹å›¾æ ‡
+	IMAGE mFlagImage;				// æ——å­
 
 	int mCutStageCounter;
-	IMAGE mCurrentStageImage;		// STAGE ×ÖÑù
-	IMAGE mBlackNumberImage;		// 0123456789 µ±Ç°¹Ø¿¨Êı
+	IMAGE mCurrentStageImage;		// STAGE å­—æ ·
+	IMAGE mBlackNumberImage;		// 0123456789 å½“å‰å…³å¡æ•°
 	IMAGE mGameOverImage;			//
 
-	// ³õÊ¼ mActiveEnemyTankNumber + mRemainEnemyTankNumber = 20
-	int mRemainEnemyTankNumber;		// ÓàÏÂÎ´ÏÔÊ¾µÄµĞ»úÊıÁ¿, ³õÊ¼Öµ=20, ³öÏÖÒ»¼ÜµĞ»ú¸ÃÖµ¼õÒ»
-	int mCurMovingTankNumber;		// µ±Ç°³öÏÖµÄµĞ»úÊıÁ¿
-	int mKillEnemyNum;				// ÒÑ¾­ÏûÃğµÄµĞ»úÊı
+	// åˆå§‹ mActiveEnemyTankNumber + mRemainEnemyTankNumber = 20
+	int mRemainEnemyTankNumber;		// ä½™ä¸‹æœªæ˜¾ç¤ºçš„æ•Œæœºæ•°é‡, åˆå§‹å€¼=20, å‡ºç°ä¸€æ¶æ•Œæœºè¯¥å€¼å‡ä¸€
+	int mCurMovingTankNumber;		// å½“å‰å‡ºç°çš„æ•Œæœºæ•°é‡
+	int mKillEnemyNum;				// å·²ç»æ¶ˆç­çš„æ•Œæœºæ•°
 
-	BlastStruct mBlast;				// ´ó±¾Óª±¬Õ¨
-	bool mCampDie;					// ´ó±¾Óª±»»÷ÖĞ, ²»ÔÙ Camp ÌùÍ¼ 
+	BlastStruct mBlast;				// å¤§æœ¬è¥çˆ†ç‚¸
+	bool mCampDie;					// å¤§æœ¬è¥è¢«å‡»ä¸­, ä¸å† Camp è´´å›¾ 
 
-	bool mEnemyPause;			// ÊÇ·ñ¿ÉÒÔÒÆ¶¯µĞ»ú
-	//int mEnemyPauseCounter;		// µĞ»úÔİÍ£¼ÆÊı
-	TimeClock mEnemyPauseTimer;		// µĞ»úÔİÍ£¶à¾Ã
+	bool mEnemyPause;			// æ˜¯å¦å¯ä»¥ç§»åŠ¨æ•Œæœº
+	//int mEnemyPauseCounter;		// æ•Œæœºæš‚åœè®¡æ•°
+	TimeClock mEnemyPauseTimer;		// æ•Œæœºæš‚åœå¤šä¹…
 
-	TimeClock mMainTimer;			// ¿ØÖÆ»æÍ¼ÆµÂÊ
-	TimeClock mCampTimer;		// Camp ±¬Õ¨ËÙ¶È
+	TimeClock mMainTimer;			// æ§åˆ¶ç»˜å›¾é¢‘ç‡
+	TimeClock mCampTimer;		// Camp çˆ†ç‚¸é€Ÿåº¦
 
 	int mGameOverCounter;
 	int mGameOverX, mGameOverY;	// 
-	bool mGameOverFlag;			// ÓÎÏ·½áÊø±ê¼Ç, Íæ¼ÒÉúÃüÓÃÍê, Äñ³²±»»÷ÖĞ
-	TimeClock mGameOverTimer;	// ÉÏÉı¿ØÖÆ
+	bool mGameOverFlag;			// æ¸¸æˆç»“æŸæ ‡è®°, ç©å®¶ç”Ÿå‘½ç”¨å®Œ, é¸Ÿå·¢è¢«å‡»ä¸­
+	TimeClock mGameOverTimer;	// ä¸Šå‡æ§åˆ¶
 
-	IMAGE mCreateMapTankImage;		// ×Ô¶¨ÒåµØÍ¼ÖĞµÄ Ì¹¿ËÓÎ±êÍ¼Æ¬
-	int mCMTImageX, mCMTImageY;		// ÓÎ±êÖĞĞÄµã×ø±ê
+	IMAGE mCreateMapTankImage;		// è‡ªå®šä¹‰åœ°å›¾ä¸­çš„ å¦å…‹æ¸¸æ ‡å›¾ç‰‡
+	int mCMTImageX, mCMTImageY;		// æ¸¸æ ‡ä¸­å¿ƒç‚¹åæ ‡
 
-	bool mHasCustomMap;			// µ±Ç°ÊÇ·ñÓĞÖÆ×÷µØÍ¼, ÓÃÓÚÍË³öÖÆ×÷ÔÙ´Î½øÈëÖÆ×÷, ²»»áÖ®Ç°ÖÆ×÷µÄÊı¾İ
-	bool mShowScorePanel;		// ÊÇ·ñÏÔÊ¾·ÖÊıÃæ°å
+	bool mHasCustomMap;			// å½“å‰æ˜¯å¦æœ‰åˆ¶ä½œåœ°å›¾, ç”¨äºé€€å‡ºåˆ¶ä½œå†æ¬¡è¿›å…¥åˆ¶ä½œ, ä¸ä¼šä¹‹å‰åˆ¶ä½œçš„æ•°æ®
+	bool mShowScorePanel;		// æ˜¯å¦æ˜¾ç¤ºåˆ†æ•°é¢æ¿
 
-	bool mWin;			// ÏûÃğÍêµĞ»ú,Ê¤Àû
-	int mWinCounter;	// ÏûÃğÍêºó¸ô¼¸Ãë²ÅÌø×ª
+	bool mWin;			// æ¶ˆç­å®Œæ•Œæœº,èƒœåˆ©
+	int mWinCounter;	// æ¶ˆç­å®Œåéš”å‡ ç§’æ‰è·³è½¬
 
 	bool mShowGameOverAfterScorePanel;
 	IMAGE msgoas_image;
-	int msgoas_y;		// ÉÏÉı×ø±ê
+	int msgoas_y;		// ä¸Šå‡åæ ‡
 	int msgoas_counter;
 };

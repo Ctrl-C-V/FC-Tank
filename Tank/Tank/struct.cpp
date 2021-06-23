@@ -2,19 +2,19 @@
 #include "struct.h"
 #include "MciSound.h"
 
-// ---------------- ×Óµ¯½á¹¹¾²Ì¬Êı¾İ
+// ---------------- å­å¼¹ç»“æ„é™æ€æ•°æ®
 IMAGE BulletStruct::mBulletImage[4];
-int BulletStruct::mBulletSize[4][2] = { { 4,3 },{ 3,4 },{ 4,3 },{ 3,4 } };			// ²»Í¬·½Ïò×Óµ¯³ß´ç(width height)
+int BulletStruct::mBulletSize[4][2] = { { 4,3 },{ 3,4 },{ 4,3 },{ 3,4 } };			// ä¸åŒæ–¹å‘å­å¼¹å°ºå¯¸(width height)
 
-// ×Óµ¯Ïà¶ÔÌ¹¿ËÖĞĞÄµÄÆ«ÒÆÁ¿, ×ø±êÆ«ÒÆ
+// å­å¼¹ç›¸å¯¹å¦å…‹ä¸­å¿ƒçš„åç§»é‡, åæ ‡åç§»
 int BulletStruct::devto_tank[4][2] = { { -BOX_SIZE, -1 },{ -2, -BOX_SIZE },{ BOX_SIZE - 4, -1 },{ -2, BOX_SIZE - 4 } };
 
-// ×Óµ¯Í¼Æ¬×óÉÏ½Ç×ø±ê×ª»»µ½µ¯Í·µÄÆ«ÒÆÁ¿(ÊÇ×ø±êÆ«ÒÆ²»ÊÇÏÂ±ê),
-// ×óÓÒ·½ÏòÔÚÍ¹³öµÄÉÏÃæÄÇµã, 
-// ÉÏÏÂ·½ÏòÔòÔÚÍ¹³öµÄÓÒ±ßÄÇµã
+// å­å¼¹å›¾ç‰‡å·¦ä¸Šè§’åæ ‡è½¬æ¢åˆ°å¼¹å¤´çš„åç§»é‡(æ˜¯åæ ‡åç§»ä¸æ˜¯ä¸‹æ ‡),
+// å·¦å³æ–¹å‘åœ¨å‡¸å‡ºçš„ä¸Šé¢é‚£ç‚¹, 
+// ä¸Šä¸‹æ–¹å‘åˆ™åœ¨å‡¸å‡ºçš„å³è¾¹é‚£ç‚¹
 int BulletStruct::devto_head[4][2] = { { 0, 1 },{ 2, 0 },{ 4, 1 },{ 2, 4 } };
 
-// ±¬Õ¨ÖĞĞÄÏà¶ÔÓÚ×Óµ¯Í·µÄÏÂ±êÆ«ÒÆÁ¿
+// çˆ†ç‚¸ä¸­å¿ƒç›¸å¯¹äºå­å¼¹å¤´çš„ä¸‹æ ‡åç§»é‡
 int BulletStruct::bomb_center_dev[4][2] = { { 1, 0 },{ 0, 1 },{ 0, 0 },{ 0, 0 } };	// 
 
 //------------------------
@@ -29,7 +29,7 @@ BlastStruct::BlastStruct()
 	Init();
 	timer.SetDrtTime(36);
 
-	// Ì¹¿Ë±¬Õ¨Í¼Æ¬½á¹¹
+	// å¦å…‹çˆ†ç‚¸å›¾ç‰‡ç»“æ„
 	TCHAR buf[100];
 	for (INT i = 0; i < 5; i++)
 	{
@@ -83,7 +83,7 @@ BlastState BlastStruct::Blasting(const HDC& center_hdc)
 	return BlastState::NotBlast;
 }
 
-// ×¨ÓÃÓÚµĞ»ú±¬Õ¨
+// ä¸“ç”¨äºæ•Œæœºçˆ†ç‚¸
 BlastState BlastStruct::EnemyBlasting(const HDC &center_hdc, IMAGE* score )
 {
 	int index[13] = { 0,1,1,2,2,3,3,4,4,3,2,1,0 };
@@ -128,7 +128,7 @@ IMAGE StarClass::mStarImage[4];
 StarClass::StarClass()
 {
 	TCHAR buf[100];
-	// ³öÉúËÄ½ÇĞÇÉÁË¸
+	// å‡ºç”Ÿå››è§’æ˜Ÿé—ªçƒ
 	for (int i = 0; i < 4; i++)
 	{
 		_stprintf_s(buf, _T("./res/big/star%d.gif"), i);
@@ -140,21 +140,21 @@ StarClass::StarClass()
 
 void StarClass::Init()
 {
-	mStarIndexDev = -1;						// ¿ØÖÆË÷ÒıÏÂ±êµÄÔö¼Ó»¹ÊÇ¼õÉÙ
-	mStarIndex = 3;							// star Í¼Æ¬Ë÷ÒıÏÂ±ê
-	mStarCounter = 0;						// ¶àÉÙ´Î¸ü»» star Í¼Æ¬
+	mStarIndexDev = -1;						// æ§åˆ¶ç´¢å¼•ä¸‹æ ‡çš„å¢åŠ è¿˜æ˜¯å‡å°‘
+	mStarIndex = 3;							// star å›¾ç‰‡ç´¢å¼•ä¸‹æ ‡
+	mStarCounter = 0;						// å¤šå°‘æ¬¡æ›´æ¢ star å›¾ç‰‡
 	mTankOutAfterCounter = rand() % 10 + 10;
-	mIsOuted = false;						// Ì¹¿ËÊÇ·ñÒÑ¾­³öÏÖ
+	mIsOuted = false;						// å¦å…‹æ˜¯å¦å·²ç»å‡ºç°
 	mStarOuted = false;
 }
 
 Star_State StarClass::ShowStar(const HDC& center_hdc, int tankx, int tanky)
 {
-	// Ì¹¿ËÒÑ¾­³öÏÖ,²»ÓÃÉÁË¸,Ö±½Ó·µ»Ø
+	// å¦å…‹å·²ç»å‡ºç°,ä¸ç”¨é—ªçƒ,ç›´æ¥è¿”å›
 	if (mIsOuted == true)
 		return Star_State::Tank_Out;
 
-	// ¿ªÊ¼ÉÁË¸ËÄ½ÇĞÇ
+	// å¼€å§‹é—ªçƒå››è§’æ˜Ÿ
 	if (mStarCounter++ % 2 == 0)
 	{
 		if (mStarIndex + mStarIndexDev < 0)
@@ -173,7 +173,7 @@ Star_State StarClass::ShowStar(const HDC& center_hdc, int tankx, int tanky)
 		}
 		if (mStarCounter == 25)
 		{
-			mIsOuted = true;						// ½áÊøÉÁË¸, TankMoving() º¯Êı¿ªÊ¼Ñ­»·, Ì¹¿Ë¿ªÊ¼ÒÆ¶¯
+			mIsOuted = true;						// ç»“æŸé—ªçƒ, TankMoving() å‡½æ•°å¼€å§‹å¾ªç¯, å¦å…‹å¼€å§‹ç§»åŠ¨
 			return Star_State::Star_Stop;
 		}
 	}
@@ -191,15 +191,15 @@ bool StarClass::IsStop()
 
 Star_State StarClass::EnemyShowStar(const HDC &center_hdc, int tankx, int tanky, const BoxMarkStruct* bms)
 {
-	// Ì¹¿ËÒÑ¾­³öÏÖ,²»ÓÃÉÁË¸,Ö±½Ó·µ»Ø
+	// å¦å…‹å·²ç»å‡ºç°,ä¸ç”¨é—ªçƒ,ç›´æ¥è¿”å›
 	if (mIsOuted == true)
 		return Star_State::Tank_Out;
 
-	// Ò»¶ÎÊ±¼äºó²ÅÏÔÊ¾ËÄ½ÇĞÇ, Ö®Ç°Áô¿Õ
+	// ä¸€æ®µæ—¶é—´åæ‰æ˜¾ç¤ºå››è§’æ˜Ÿ, ä¹‹å‰ç•™ç©º
 	if (mTankOutAfterCounter-- > 0)
 		return Star_State::Star_Timing;
 
-	// ËÄ½ÇĞÇ»¹Ã»³öÏÖ²Å¼ì²â box_4
+	// å››è§’æ˜Ÿè¿˜æ²¡å‡ºç°æ‰æ£€æµ‹ box_4
 	if (mStarOuted == false)
 	{
 		int iy = tanky / SMALL_BOX_SIZE - 2;
@@ -208,7 +208,7 @@ Star_State StarClass::EnemyShowStar(const HDC &center_hdc, int tankx, int tanky,
 		{
 			for (int j = jx; j < jx + 4; j++)
 			{
-				// ¼ì²âËÄ½ÇĞÇ, Íæ¼Ò,µĞ»ú,
+				// æ£€æµ‹å››è§’æ˜Ÿ, ç©å®¶,æ•Œæœº,
 				if (bms->box_4[i][j] != STAR_SIGN && bms->box_4[i][j] > _FOREST)
 				{
 					mTankOutAfterCounter = rand() % 100 + 10;
@@ -217,12 +217,12 @@ Star_State StarClass::EnemyShowStar(const HDC &center_hdc, int tankx, int tanky,
 			}
 		}
 
-		// ËÄ½ÇĞÇ¸Õ³öÏÖ, ·µ»ØÉÏ²ãº¯Êı ±ê¼Ç box_4
+		// å››è§’æ˜Ÿåˆšå‡ºç°, è¿”å›ä¸Šå±‚å‡½æ•° æ ‡è®° box_4
 		mStarOuted = true;
 		return Star_State::Star_Out;
 	}
 
-	// ¿ªÊ¼ÉÁË¸ËÄ½ÇĞÇ
+	// å¼€å§‹é—ªçƒå››è§’æ˜Ÿ
 	if (mStarCounter++ % 2 == 0)
 	{
 		if (mStarIndex + mStarIndexDev < 0)
@@ -241,7 +241,7 @@ Star_State StarClass::EnemyShowStar(const HDC &center_hdc, int tankx, int tanky,
 		}
 		if (mStarCounter == 35)
 		{
-			mIsOuted = true;						// ½áÊøÉÁË¸, TankMoving() º¯Êı¿ªÊ¼Ñ­»·, Ì¹¿Ë¿ªÊ¼ÒÆ¶¯
+			mIsOuted = true;						// ç»“æŸé—ªçƒ, TankMoving() å‡½æ•°å¼€å§‹å¾ªç¯, å¦å…‹å¼€å§‹ç§»åŠ¨
 			return Star_State::Star_Stop;
 		}
 	}
@@ -257,7 +257,7 @@ IMAGE RingClass::image[2];
 RingClass::RingClass()
 {
 	TCHAR buf[100];
-	// ³öÉú±£»¤»·
+	// å‡ºç”Ÿä¿æŠ¤ç¯
 	for (int i = 0; i < 2; i++)
 	{
 		_stprintf_s(buf, _T("./res/big/ring%d.gif"), i);
@@ -337,7 +337,7 @@ void PropClass::Init(BoxMarkStruct * b)
 	}
 }
 
-// GameControl ÄÚÑ­»·¼ì²â¸Ãº¯Êı
+// GameControl å†…å¾ªç¯æ£€æµ‹è¯¥å‡½æ•°
 void PropClass::ShowProp(const HDC &canvas_hdc)
 {
 	if (!can_show)
@@ -360,26 +360,26 @@ void PropClass::ShowProp(const HDC &canvas_hdc)
 				BOX_SIZE * 2, GetImageHDC(&image[prop_kind]), 0, 0, BOX_SIZE * 2, BOX_SIZE * 2, 0x000000);
 	}
 
-	// ³¬¹ıÊ±¼ä ÏûÊ§
+	// è¶…è¿‡æ—¶é—´ æ¶ˆå¤±
 	if (index_counter > 1300)
 		StopShowProp(false);
 }
 
-// µÀ¾ßµĞ»ú±»ÏûÃğµ÷ÓÃ¸Ãº¯Êı
+// é“å…·æ•Œæœºè¢«æ¶ˆç­è°ƒç”¨è¯¥å‡½æ•°
 void PropClass::StartShowProp(int _i, int _j)
 {
-	// Çå³ıÉÏÒ»´ÎµÄ±ê¼Ç, ·ÀÖ¹µÚÒ»¸öµÀ¾ß»¹Ã»ÏûÊ§,³öÏÖµÚ¶ş¸öµÀ¾ßµÄÊ±ºò, ²ĞÁôµÚÒ»¸öµÀ¾ßµÄ SIGN
+	// æ¸…é™¤ä¸Šä¸€æ¬¡çš„æ ‡è®°, é˜²æ­¢ç¬¬ä¸€ä¸ªé“å…·è¿˜æ²¡æ¶ˆå¤±,å‡ºç°ç¬¬äºŒä¸ªé“å…·çš„æ—¶å€™, æ®‹ç•™ç¬¬ä¸€ä¸ªé“å…·çš„ SIGN
 	SignPropBox(_EMPTY);
 
 	leftx = _j * BOX_SIZE;// (rand() % 25 + 1) * BOX_SIZE;
 	topy = _i * BOX_SIZE; //(rand() % 25 + 1) * BOX_SIZE;
 	can_show = true;
-	prop_kind = rand() % 6;		// Ëæ»ú³öÏÖÒ»¸öµÀ¾ß
+	prop_kind = rand() % 6;		// éšæœºå‡ºç°ä¸€ä¸ªé“å…·
 	index_counter = 0;
 	SignPropBox(PROP_SIGN + prop_kind);
 }
 
-// getted = true ±íÊ¾Íæ¼Ò»ñµÃµÀ¾ß, ÏÔÊ¾·ÖÊı, false Ôò³¬Ê±²»ÏÔÊ¾·ÖÊı
+// getted = true è¡¨ç¤ºç©å®¶è·å¾—é“å…·, æ˜¾ç¤ºåˆ†æ•°, false åˆ™è¶…æ—¶ä¸æ˜¾ç¤ºåˆ†æ•°
 void PropClass::StopShowProp(bool getted)
 {
 	//can_show = false;
@@ -423,7 +423,7 @@ IMAGE ScorePanel::background;
 IMAGE ScorePanel::yellow_number;
 ScorePanel::ScorePanel(int id)
 {
-	//²»ÄÜ, gameover ÔÙ´Î½øĞĞÓÎÏ·¿ÉÄÜ»á´óÓÚ 2 player_num++;
+	//ä¸èƒ½, gameover å†æ¬¡è¿›è¡Œæ¸¸æˆå¯èƒ½ä¼šå¤§äº 2 player_num++;
 	player_id = id;
 	switch (player_id)
 	{
@@ -485,8 +485,8 @@ ScorePanel::ScorePanel(int id)
 
 	for (int i = 0; i < 4; i++)
 	{
-		kill_num[i] = 0;		// ½ÓÊÕ PlayerBase ´«µİ¹ıÀ´µÄÊı¾İ
-		kill_num2[i] = -1;		// Ä¬ÈÏÉ±µĞÊı = -1 flag, ´ËÊ±²»ÏÔÊ¾
+		kill_num[i] = 0;		// æ¥æ”¶ PlayerBase ä¼ é€’è¿‡æ¥çš„æ•°æ®
+		kill_num2[i] = -1;		// é»˜è®¤æ€æ•Œæ•° = -1 flag, æ­¤æ—¶ä¸æ˜¾ç¤º
 	}
 
 	total_kill_numm = 0;
@@ -508,10 +508,10 @@ bool ScorePanel::show(const HDC& image_hdc)
 	BitBlt(image_hdc, player_x, player_y, player.getwidth(), player.getheight(), GetImageHDC(&player), 0, 0, SRCCOPY);
 	BitBlt(image_hdc, pts_x, pts_y, pts.getwidth(), pts.getheight(), GetImageHDC(&pts), 0, 0, SRCCOPY);
 
-	// ¿ØÖÆÃ¿ĞĞÉ±µĞÊı×Ô¼ÓÏÔÊ¾ ++ ÏÔÊ¾ÍêÒ»ĞĞ²ÅÏÔÊ¾ÏÂÒ»ĞĞ
+	// æ§åˆ¶æ¯è¡Œæ€æ•Œæ•°è‡ªåŠ æ˜¾ç¤º ++ æ˜¾ç¤ºå®Œä¸€è¡Œæ‰æ˜¾ç¤ºä¸‹ä¸€è¡Œ
 	for (int i = 0; i < 4; i++)
 	{
-		// µ±Ç°ÏÔÊ¾×ÅµÄĞĞ
+		// å½“å‰æ˜¾ç¤ºç€çš„è¡Œ
 		if (cur_line == i)
 		{
 			int temp = kill_num2[i] + 1;
@@ -523,7 +523,7 @@ bool ScorePanel::show(const HDC& image_hdc)
 				break;
 			}
 
-			// ¼ì²âËùÓĞÍæ¼Ò¸ÃĞĞ·ÖÊıÏÔÊ¾ÍêÁËÂğ
+			// æ£€æµ‹æ‰€æœ‰ç©å®¶è¯¥è¡Œåˆ†æ•°æ˜¾ç¤ºå®Œäº†å—
 			else
 			{
 				line_done_flag[player_id] = true;
@@ -555,11 +555,11 @@ bool ScorePanel::show(const HDC& image_hdc)
 		TransparentBlt(image_hdc, 154 - 8, 32, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, GetImageHDC(&number),
 			BLACK_NUMBER_SIZE * (stage / 10), 0, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, 0x000000);
 
-	// 0·Ö
+	// 0åˆ†
 	TransparentBlt(image_hdc, total_score_x, total_score_y, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, GetImageHDC(&yellow_number),
 		BLACK_NUMBER_SIZE * 0, 0, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, 0x000000);
 
-	//  ÈıÎ»Êı
+	//  ä¸‰ä½æ•°
 	if (total_score > 90)
 	{
 		TransparentBlt(image_hdc, total_score_x - 8, total_score_y, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, GetImageHDC(&yellow_number),
@@ -568,7 +568,7 @@ bool ScorePanel::show(const HDC& image_hdc)
 		TransparentBlt(image_hdc, total_score_x - 16, total_score_y, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, GetImageHDC(&yellow_number),
 			BLACK_NUMBER_SIZE * (total_score % 1000 / 100), 0, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, 0x000000);
 	}
-	// ËÄÎ»Êı
+	// å››ä½æ•°
 	if (total_score > 900)	
 		TransparentBlt(image_hdc, total_score_x - 24, total_score_y, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, GetImageHDC(&yellow_number),
 			BLACK_NUMBER_SIZE * (total_score / 1000), 0, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, 0x000000);
@@ -592,9 +592,9 @@ bool ScorePanel::show(const HDC& image_hdc)
 				BLACK_NUMBER_SIZE * (kill_num2[i] % 10), 0, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, 0x000000);
 		}
 
-		int score = (i + 1) * 100 * kill_num2[i];	// Ò»¼¶Ì¹¿ËÒ»¼Ü100·Ö, ÒÀ´ÎÀàÍÆ
+		int score = (i + 1) * 100 * kill_num2[i];	// ä¸€çº§å¦å…‹ä¸€æ¶100åˆ†, ä¾æ¬¡ç±»æ¨
 
-		// ¼ÆËã·ÖÊıÊÇ¶àÉÙÎ»Êı
+		// è®¡ç®—åˆ†æ•°æ˜¯å¤šå°‘ä½æ•°
 		int temp = score;
 		int score_bit = 1;		
 		while (temp / 10 != 0)
@@ -603,14 +603,14 @@ bool ScorePanel::show(const HDC& image_hdc)
 			temp /= 10;
 		}
 
-		// ·ÖÊı×î¶à 4 Î»Êı
+		// åˆ†æ•°æœ€å¤š 4 ä½æ•°
 		switch (score_bit)
 		{
 		case 1:
 			TransparentBlt(image_hdc, x[i][0] + 16, y[i][0], BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, GetImageHDC(&number),
 				BLACK_NUMBER_SIZE * 0, 0, BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, 0x000000);
 			break;
-		// ²»¿ÉÄÜÊÇ Á½Î»Êı!?!? case 2: break;
+		// ä¸å¯èƒ½æ˜¯ ä¸¤ä½æ•°!?!? case 2: break;
 
 		case 3:
 			TransparentBlt(image_hdc, x[i][0], y[i][0], BLACK_NUMBER_SIZE, BLACK_NUMBER_SIZE, GetImageHDC(&number),
@@ -663,21 +663,21 @@ bool ScorePanel::show(const HDC& image_hdc)
 		else if (player_num == 2 && who_bunds[1] > who_bunds[0] && who_bunds[1] > 1000)
 			TransparentBlt(image_hdc, 170, 190, 63, 15, GetImageHDC(&bunds), 0, 0, 63, 15, 0x000000);
 			
-		// Ö»²¥·ÅÒ»´Î
+		// åªæ’­æ”¾ä¸€æ¬¡
 		if (end_counter == 0 && player_num == 2 && who_bunds[0] + who_bunds[1] > 2000)
 			MciSound::_PlaySound(S_BOUNS1000);
 
 		if (end_counter++ > 30)
-			return false;			// ·µ»Ø½áÊø±êÖ¾
+			return false;			// è¿”å›ç»“æŸæ ‡å¿—
 	}
 
 	return true;
 }
 
-/*ÓÎÏ·½áÊøÊ±ºò, »ñÈ¡Ã¿¸öÍæ¼ÒµÄÉ±µĞÊı!! Ö»ÄÜµ÷ÓÃÒ»´Î!!! */
+/*æ¸¸æˆç»“æŸæ—¶å€™, è·å–æ¯ä¸ªç©å®¶çš„æ€æ•Œæ•°!! åªèƒ½è°ƒç”¨ä¸€æ¬¡!!! */
 void ScorePanel::ResetData(const int * nums, const int& players, const int& sta)
 {
-	// Êı¾İÒªÖØÖÃ, ±ÜÃâÏÂ´ÎÏÔÊ¾µÄÊ±ºò±£ÁôÔ­ÏÈµÄÊı¾İ
+	// æ•°æ®è¦é‡ç½®, é¿å…ä¸‹æ¬¡æ˜¾ç¤ºçš„æ—¶å€™ä¿ç•™åŸå…ˆçš„æ•°æ®
 	player_num = players;
 	cur_line = 0;
 	end_counter = 0;
@@ -686,15 +686,15 @@ void ScorePanel::ResetData(const int * nums, const int& players, const int& sta)
 	total_kill_numm = 0;
 	total_score = 0;
 	stage = sta;
-	who_bunds[player_id] = 0;// ²»ÄÜÉèÖÃµ½ÁíÒ»¸öÍæ¼ÒµÄÊı¾İ~~!! = who_bunds[1] = 0;
+	who_bunds[player_id] = 0;// ä¸èƒ½è®¾ç½®åˆ°å¦ä¸€ä¸ªç©å®¶çš„æ•°æ®~~!! = who_bunds[1] = 0;
 
 	for (int i = 0; i < 4; i++)
 	{
-		kill_num[i] = 0;		// ½ÓÊÕ PlayerBase ´«µİ¹ıÀ´µÄÊı¾İ
-		kill_num2[i] = -1;		// Ä¬ÈÏÉ±µĞÊı = -1 flag, ´ËÊ±²»ÏÔÊ¾
+		kill_num[i] = 0;		// æ¥æ”¶ PlayerBase ä¼ é€’è¿‡æ¥çš„æ•°æ®
+		kill_num2[i] = -1;		// é»˜è®¤æ€æ•Œæ•° = -1 flag, æ­¤æ—¶ä¸æ˜¾ç¤º
 	}
 
-	// »ñÈ¡ĞÂÊı¾İ
+	// è·å–æ–°æ•°æ®
 	for (int i = 0; i < 4; i++)
 	{
 		kill_num[i] = nums[i];
@@ -720,14 +720,14 @@ void PlayerGameover::Init(int player_id)
 	switch (player_id)
 	{
 	case 0:
-		// Íæ¼Òdie ºóÏÔÊ¾ÓÒÒÆµÄ GAMEOVER ×ÖÑù
+		// ç©å®¶die åæ˜¾ç¤ºå³ç§»çš„ GAMEOVER å­—æ ·
 		mGameoverX = 0;
 		mGameover_Dev = 3;
 		mGameover_end_x = 53;
 		break;
 
 	case 1:
-		// Íæ¼Òdie ºóÏÔÊ¾×óÒÆµÄ GAMEOVER ×ÖÑù
+		// ç©å®¶die åæ˜¾ç¤ºå·¦ç§»çš„ GAMEOVER å­—æ ·
 		mGameoverX = 220;
 		mGameover_Dev = -3;
 		mGameover_end_x = 122;
@@ -736,7 +736,7 @@ void PlayerGameover::Init(int player_id)
 		break;
 	}
 
-	// Íæ¼Ò±»ÏûÃğºóÏÔÊ¾Í¼Æ¬ GAMEOVER
+	// ç©å®¶è¢«æ¶ˆç­åæ˜¾ç¤ºå›¾ç‰‡ GAMEOVER
 	mGameoverY = 191;
 	mGameoverCounter = 0;
 	mShowGameover = false;

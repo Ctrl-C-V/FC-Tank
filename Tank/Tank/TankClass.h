@@ -1,22 +1,22 @@
 #pragma once
 
-/************ µ¥¸öÌ¹¿ËĞÅÏ¢ *********
-* Íæ¼ÒÌ¹¿ËĞÅÏ¢
-* µĞ»úÌ¹¿ËĞÅÏ¢
+/************ å•ä¸ªå¦å…‹ä¿¡æ¯ *********
+* ç©å®¶å¦å…‹ä¿¡æ¯
+* æ•Œæœºå¦å…‹ä¿¡æ¯
 ***********************************/
 class TankInfo
 {
 public:
-	TankInfo(byte tank_color, int enemy_level, bool notuse );	// tank_color [0-3]; enemy_level [0-4], notuse->Çø±ğÍæ¼ÒÌ¹¿Ë
+	TankInfo(byte tank_color, int enemy_level, bool notuse );	// tank_color [0-3]; enemy_level [0-4], notuse->åŒºåˆ«ç©å®¶å¦å…‹
 	TankInfo(byte player, byte level);							// player [0-1]; level [0-3]
 	~TankInfo();
 
-	IMAGE GetTankImage( byte dir, int index = 0 );		// index Á½ÕÅ²»Í¬¶¯×÷µÄÍ¼Æ¬Ë÷Òı [0-1]
+	IMAGE GetTankImage( byte dir, int index = 0 );		// index ä¸¤å¼ ä¸åŒåŠ¨ä½œçš„å›¾ç‰‡ç´¢å¼• [0-1]
 private:
-	IMAGE mTankImage[4][2];			// ËÄ¸ö·½Ïò,Ò»¸ö·½ÏòÁ½ÕÅÌùÍ¼ÊµÏÖÌ¹¿ËÒÆ¶¯¶¯×÷.
+	IMAGE mTankImage[4][2];			// å››ä¸ªæ–¹å‘,ä¸€ä¸ªæ–¹å‘ä¸¤å¼ è´´å›¾å®ç°å¦å…‹ç§»åŠ¨åŠ¨ä½œ.
 };
 
-/************ Íæ¼ÒÌ¹¿Ë¼¶±ğ **********/
+/************ ç©å®¶å¦å…‹çº§åˆ« **********/
 
 class PlayerTank
 {
@@ -26,7 +26,7 @@ public:
 	IMAGE GetTankImage( byte level, byte dir, bool moving = false );	// 
 
 private:
-	TankInfo* mTankInfo[4];		// 4 ¸ö¼¶±ğÌ¹¿Ë
-	byte mMoveIndex : 1;		// Á½ÕÅÌ¹¿ËÍ¼Æ¬×é³ÉÒ»¸ö¶¯×÷µÄ ÏÂ±êË÷Òı,Ö»Õ¼ 1 bit ÄÚ´æ£¬ÖµÖ»ÄÜÎª 0¡¢1
+	TankInfo* mTankInfo[4];		// 4 ä¸ªçº§åˆ«å¦å…‹
+	byte mMoveIndex : 1;		// ä¸¤å¼ å¦å…‹å›¾ç‰‡ç»„æˆä¸€ä¸ªåŠ¨ä½œçš„ ä¸‹æ ‡ç´¢å¼•,åªå  1 bit å†…å­˜ï¼Œå€¼åªèƒ½ä¸º 0ã€1
 };
 
